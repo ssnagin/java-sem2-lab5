@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/java-sem2-lab5/src/Main.java</file>
+            <file>jar:file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/lib/json-20250107.jar!/META-INF/MANIFEST.MF</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/README.md</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/MusicBand.java</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/MusicGenre.java</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/Album.java</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/Coordinates.java</file>
+            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/exceptions/BeyondLimitsException.java</file>
         </group>
     </open-files>
 </project-private>
