@@ -4,7 +4,7 @@
  */
 package model;
 
-import interfaces.Validatable;
+import model.interfaces.Validatable;
 
 /**
  *
@@ -45,6 +45,28 @@ public class Album implements Validatable {
     @Override
     public boolean isValid() {
         return isNameValid() && isTracksValid();
+    }
+    
+    @Override
+    public String parseValidationError() {
+       /** 
+        * StringBuidler instead of String:
+        * pros:
+        * works with a single instance (object), which can be modified via
+        * append(), delete(), insert(), replace(), reverse()
+        */ 
+        StringBuilder results = new StringBuilder();
+        results.append("");
+        
+        if (isNameValid()) {
+            results.append("name cannot be null");
+        }
+        if (isTracksValid()) {
+            results.append("tracks can be only positive");
+        }
+        
+        
+        return results.toString();
     }
 
     private boolean isNameValid() {

@@ -3,13 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>jar:file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/lib/json-20250107.jar!/META-INF/MANIFEST.MF</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/README.md</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/MusicBand.java</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/MusicGenre.java</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/Album.java</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/models/Coordinates.java</file>
-            <file>file:/P:/DEVELOPER/Data/projects/Java/Github/java-sem2-lab5/src/exceptions/BeyondLimitsException.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/MusicGenre.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/manifest.mf</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/build.xml</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/MusicBand.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/Album.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/.github/workflows/ant.yml</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/interfaces/Validatable.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/README.md</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/Main.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/Coordinates.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/dist/README.TXT</file>
         </group>
     </open-files>
 </project-private>

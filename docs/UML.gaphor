@@ -27,6 +27,7 @@ controlflow {
 <ref refid="f172e1e6-e94e-11ef-b306-f17fcf0e2dfa"/>
 <ref refid="02573387-e94a-11ef-9302-f17fcf0e2dfa"/>
 <ref refid="67d25438-e951-11ef-845e-f17fcf0e2dfa"/>
+<ref refid="d7e802d8-e953-11ef-b156-f17fcf0e2dfa"/>
 <ref refid="726d7555-e94f-11ef-9739-f17fcf0e2dfa"/>
 <ref refid="75dd1d7a-e94f-11ef-9ca4-f17fcf0e2dfa"/>
 </reflist>
@@ -539,4 +540,34 @@ controlflow {
 <ref refid="67d21ab2-e951-11ef-9243-f17fcf0e2dfa"/>
 </subject>
 </PackageItem>
+<Class id="d7e7c360-e953-11ef-b85e-f17fcf0e2dfa">
+<name>
+<val>MusicBandManager</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="d7e802d8-e953-11ef-b156-f17fcf0e2dfa"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="d7e802d8-e953-11ef-b156-f17fcf0e2dfa">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 112.1123891930804, 578.367120859206)</val>
+</matrix>
+<top-left>
+<val>(0.0, 0.0)</val>
+</top-left>
+<width>
+<val>173.0375386105453</val>
+</width>
+<height>
+<val>186.50871169581274</val>
+</height>
+<diagram>
+<ref refid="6b397dbc-e949-11ef-a638-f17fcf0e2dfa"/>
+</diagram>
+<subject>
+<ref refid="d7e7c360-e953-11ef-b85e-f17fcf0e2dfa"/>
+</subject>
+</ClassItem>
 </gaphor>
