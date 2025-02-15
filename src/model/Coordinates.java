@@ -2,9 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package models;
-
-import exceptions.BeyondLimitsException;
+package model;
 
 /**
  *
@@ -14,20 +12,29 @@ public class Coordinates {
     private long x; //Максимальное значение поля: 180
     private Integer y; //Максимальное значение поля: 750, Поле не может быть null
     
-//    private void setX(long x) {
-//        try {
-//            this.x = x;
-//        } catch (BeyondLimitsException exception) {
-//            throw new BeyondLimitsException();
-//        }
-//        
-//    }
+    public Coordinates(long x, Integer y) {
+        setX(x);
+        setY(y);
+    }
     
-    private void setY(int y) {
+    public void setY(int y) {
         this.y = y;
     }
     
-    public boolean validate() {
-        
+    public void setX(long x) {
+        this.x = x;
+    }
+    
+    public long getX() {
+        return this.x;
+    }
+    
+    public Integer getY() {
+        return this.y;
+    }
+    
+    @Override
+    public String toString() {
+        return "Coordinates={x=" + Long.toString(x) + ", y=" + Integer.toString(y) + "}";
     }
 }
