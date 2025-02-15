@@ -4,11 +4,13 @@
  */
 package model;
 
+import interfaces.Validatable;
+
 /**
  *
  * @author DEVELOPER
  */
-public class Album {
+public class Album implements Validatable {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long tracks = null; //Поле может быть null, Значение поля должно быть больше 0
     
@@ -36,5 +38,20 @@ public class Album {
     @Override
     public String toString() {
         return "Album={name='" + getName() + "', tracks='" + Long.toString(getTracks()) + "'}";
+    }
+    
+    // ==== Validatable interface overrides ==== //
+    
+    @Override
+    public boolean isValid() {
+        return isNameValid() && isTracksValid();
+    }
+
+    private boolean isNameValid() {
+        return (this.name == null || this.name.equals("")) ? false : true;
+    }
+
+    private boolean isTracksValid() {
+        return tracks <= 0 ? false : true;
     }
 }
