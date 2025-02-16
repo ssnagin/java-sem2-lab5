@@ -3,17 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/MusicGenre.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/manifest.mf</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/build.xml</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/MusicBand.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/Album.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/.github/workflows/ant.yml</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/interfaces/Validatable.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/README.md</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/Main.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/model/Coordinates.java</file>
-            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/dist/README.TXT</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/settings.gradle.kts</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/src/main/java/com/ssnagin/lab5java/sem2/lab5/App.java</file>
+            <file>file:/home/developer/Projects/github/ssnagin/java-sem2-lab5/build.gradle.kts</file>
         </group>
     </open-files>
 </project-private>
