@@ -3,12 +3,23 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import com.ssnagin.lab5java.sem2.lab5.model.Album;
+import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
+import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
+import java.time.LocalDate;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        MusicBand musicBand = new MusicBand(
+                1,
+                "test", 
+                new Coordinates((long) 228, 1),
+                LocalDate.now(),
+                1L, 
+                1,
+                MusicGenre.MATH_ROCK,
+                new Album("Test", (long) 123)
+        );
     }
 }

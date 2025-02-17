@@ -4,17 +4,20 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.model;
 
+import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
+import java.util.Objects;
+
 /**
  *
  * @author DEVELOPER
  */
 public class Coordinates {
+    @MaxValue(maxValue=180)
     private Long x = null; //Максимальное значение поля: 180. (Так как long может быть null, ставим Long вместо long)
+    
+    @MaxValue(maxValue=750)
     private Integer y; //Максимальное значение поля: 750, Поле не может быть null
-    
-    private final long X_MAX = 180;
-    private final Integer Y_MAX = 750;
-    
+
     public Coordinates(Long x, Integer y) {
         setX(x);
         setY(y);
@@ -43,6 +46,19 @@ public class Coordinates {
     @Override
     public String toString() {
         return "Coordinates={x=" + Long.toString(x) + ", y=" + Integer.toString(y) + "}";
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coordinates)) return false;
+        Coordinates that = (Coordinates) o;
+        return Objects.equals(x, that.x) && Objects.equals(y, that.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
     
     // ==== Validatable interface overrides ==== //
