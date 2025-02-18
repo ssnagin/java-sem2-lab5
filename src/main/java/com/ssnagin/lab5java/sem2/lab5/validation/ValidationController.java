@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.validation;
 
+import com.ssnagin.lab5java.sem2.lab5.validation.errors.ValidationError;
 import java.util.ArrayList;
 import java.util.List;
 

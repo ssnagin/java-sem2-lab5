@@ -18,5 +18,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface MaxValue {
      long maxValue();
-     String showMessage() default "value must be below {value}"; 
+     String showMessage() default "value must be below {0}";
+     
+     
 }

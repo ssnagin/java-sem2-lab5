@@ -5,56 +5,47 @@
 package com.ssnagin.lab5java.sem2.lab5.validation.classes;
 
 import com.ssnagin.lab5java.sem2.lab5.validation.AnnotationValidator;
-import com.ssnagin.lab5java.sem2.lab5.validation.ValidationError;
+import com.ssnagin.lab5java.sem2.lab5.validation.errors.ValidationError;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author developer
  */
-public class MaxValueValidator<T extends Comparable<T>> extends AnnotationValidator<T> {
+public class MaxValueValidator<T> extends AnnotationValidator<T> {
     
-    private final T maxValue;
-    
-    public MaxValueValidator(T maxValue) {
-        this.maxValue = maxValue;
-    }
-    
-    @Override
-    public List<ValidationError> validate(T object) {
-        
-        // gpt какую-то фигню сгенерил, переделать тут всё
-        List<ValidationError> errors = new ArrayList<>();
+      @Override
+      public ValidationError validateField(Field field, Object object) {
+          
+          if (!field.isAnnotationPresent(MaxValue.class)) return null;
+          
+          MaxValue maxValueAnnotation = field.getAnnotation(MaxValue.class);
+          
+          Long maxValue = maxValueAnnotation.maxValue();
+          String showMessage = maxValueAnnotation.showMessage();
+          
+          field.setAccessible(true);
 
-        // Получаем все поля класса
-        Field[] fields = object.getClass().getDeclaredFields();
-        for (Field field : fields) {
-
-            if (field.isAnnotationPresent(MaxValue.class)) {
-                MaxValue maxValueAnnotation = field.getAnnotation(MaxValue.class);
-                long maxValue = maxValueAnnotation.maxValue(); // Получаем максимальное значение
-                String showMessage = maxValueAnnotation.showMessage(); // Получаем сообщение
-
-                field.setAccessible(true); // Делаем поле доступным
-                try {
-                    Object value = field.get(object); // Получаем значение поля
-                    if (value instanceof Number) {
-                        long fieldValue = ((Number) value).longValue(); // Приводим к long
-                        if (fieldValue > maxValue) {
-                            // Формируем сообщение об ошибке
-                            String message = showMessage.replace("{value}", String.valueOf(maxValue));
-                            errors.add(new ValidationError(field.getName(), message));
-                        }
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace(); // Обработка исключения
-                }
-            }
-        }
-
-        return errors; // Возвращаем список ошибок
-    }
+          try {
+              Object value = field.get(object);
+              if (!(value instanceof Number)) return null;
+              
+              long fieldValue = ((Number) value).longValue();
+              
+              if (fieldValue > maxValue) return new ValidationError(value, MessageFormat.format(showMessage, maxValue));
+              
+              return null;
+          } catch (IllegalArgumentException ex) {
+              Logger.getLogger(MaxValueValidator.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IllegalAccessException ex) {
+              Logger.getLogger(MaxValueValidator.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          return null;
+          
+          
+      }
 }

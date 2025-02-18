@@ -7,6 +7,7 @@ import com.ssnagin.lab5java.sem2.lab5.model.Album;
 import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
+import com.ssnagin.lab5java.sem2.lab5.validation.classes.MaxValueValidator;
 import java.time.LocalDate;
 
 public class App {
@@ -14,12 +15,16 @@ public class App {
         MusicBand musicBand = new MusicBand(
                 1,
                 "test", 
-                new Coordinates((long) 228, 1),
+                new Coordinates((long) 28, 1),
                 LocalDate.now(),
                 1L, 
                 1,
                 MusicGenre.MATH_ROCK,
                 new Album("Test", (long) 123)
         );
+        var coords = new Coordinates((long) 181, 1);
+        
+        MaxValueValidator<Coordinates> test = new MaxValueValidator<>();
+        test.validate(coords);
     }
 }
