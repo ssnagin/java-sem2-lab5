@@ -14,8 +14,7 @@ import java.util.TreeSet;
 public class CollectionManager {
     
     private TreeSet<MusicBand> collection = new TreeSet();
-//   
-//    
+
 //    public CollectionManager() {
 //        
 //    }
