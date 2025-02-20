@@ -14,10 +14,12 @@ import java.util.TreeSet;
 public class CollectionManager {
     
     private TreeSet<MusicBand> collection = new TreeSet();
-
-//    public CollectionManager() {
-//        
-//    }
-//    
-//    public getValue
+    
+    public CollectionManager() {
+        
+    }
+    
+    public void addCollectionElement(MusicBand element) {
+        
+    }
 }

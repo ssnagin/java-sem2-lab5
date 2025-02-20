@@ -3,28 +3,28 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
-import com.ssnagin.lab5java.sem2.lab5.model.Album;
-import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
-import com.ssnagin.lab5java.sem2.lab5.validation.classes.MaxValueValidator;
-import java.time.LocalDate;
-
 public class App {
     public static void main(String[] args) {
-        MusicBand musicBand = new MusicBand(
-                1,
-                "test", 
-                new Coordinates((long) 28, 1),
-                LocalDate.now(),
-                1L, 
-                1,
-                MusicGenre.MATH_ROCK,
-                new Album("Test", (long) 123)
-        );
-        var coords = new Coordinates((long) 181, 1);
+        App.run();
+    }
+    
+    public static void run() {
+        /*
+        Пример создания коллекции
         
-        MaxValueValidator<Coordinates> test = new MaxValueValidator<>();
-        test.validate(coords);
+        MusicBand musicBand = new MusicBand(
+            1,
+            "test", 
+            new Coordinates((long) 28, 1),
+            LocalDate.now(),
+            1L, 
+            1,
+            MusicGenre.MATH_ROCK,
+            new Album("Test", (long) 123)
+        );
+        
+        */
+        
+        
     }
 }

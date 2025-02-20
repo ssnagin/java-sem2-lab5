@@ -21,6 +21,15 @@ public class MaxValueValidator<T> extends AnnotationValidator<T> {
       @Override
       public ValidationError validateField(Field field, Object object) {
           
+          // I got the idea, this code should be replaced
+          /*
+          
+        Check in App.java  
+          
+        MaxValueValidator<Coordinates> test = new MaxValueValidator<>();
+        test.validate(coords);
+          */
+          
           if (!field.isAnnotationPresent(MaxValue.class)) return null;
           
           MaxValue maxValueAnnotation = field.getAnnotation(MaxValue.class);

@@ -16,6 +16,8 @@ import java.util.List;
  */
 public abstract class AnnotationValidator<T> implements Validator<T> {
     
+    // I got the idea, this code should be replaced
+    
     @Override
     public List<ValidationError> validate(T object) {
         
@@ -24,8 +26,6 @@ public abstract class AnnotationValidator<T> implements Validator<T> {
         Field[] fields = object.getClass().getDeclaredFields();
         
         for (Field field : fields) {
-//            ValidationError result = this.validateField(field, object);
-//            if (result.getMessage() == "") errors.add(result);
               ValidationError result = this.validateField(field, object);
               if (result != null) errors.add(result);
         }

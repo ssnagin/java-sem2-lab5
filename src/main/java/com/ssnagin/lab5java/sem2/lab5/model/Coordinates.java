@@ -18,8 +18,6 @@ public class Coordinates {
     @MaxValue(maxValue=750)
     private Integer y; //Максимальное значение поля: 750, Поле не может быть null
     
-    private int test = 123;
-    
     public Coordinates(Long x, Integer y) {
         setX(x);
         setY(y);
