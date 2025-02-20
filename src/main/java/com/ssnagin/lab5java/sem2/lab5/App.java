@@ -3,6 +3,16 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
+import com.ssnagin.lab5java.sem2.lab5.io.IOTool;
+import com.ssnagin.lab5java.sem2.lab5.model.Album;
+import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
+import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
+import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
+import java.time.LocalDate;
+
 public class App {
     public static void main(String[] args) {
         App.run();
@@ -24,5 +34,21 @@ public class App {
         );
         
         */
+        
+        CollectionManager collectionManager = new CollectionManager();
+        CommandManager commandManager = new CommandManager();
+        IOTool inputOutputHandler = new IOTool();
+        ValidationController validationController = new ValidationController();
+        
+        collectionManager.addElement(new MusicBand(
+            "test", 
+            new Coordinates((long) 28, 1),
+            LocalDate.now(),
+            1L, 
+            1,
+            MusicGenre.MATH_ROCK,
+            new Album("Test", (long) 123)
+        ));
+        System.out.print(collectionManager.toString());
     }
 }
