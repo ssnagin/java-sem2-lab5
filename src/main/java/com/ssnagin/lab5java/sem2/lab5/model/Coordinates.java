@@ -45,7 +45,9 @@ public class Coordinates implements Comparable<Coordinates> {
     
     @Override
     public String toString() {
-        return "Coordinates={x=" + Long.toString(x) + ", y=" + Integer.toString(y) + "}";
+        return "Coordinates="
+                + "{x=" + Long.toString(x) + 
+                ", y=" + Integer.toString(y) + "}";
     }
     
     @Override

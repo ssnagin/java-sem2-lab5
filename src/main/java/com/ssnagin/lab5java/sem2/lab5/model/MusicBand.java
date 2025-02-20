@@ -9,14 +9,15 @@ import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Class for describing Music Bands
  * @author DEVELOPER
  */
 public class MusicBand implements Comparable<MusicBand> {
-    @NotNull
-    private long id; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @NotNull @PositiveNumber
+    private long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
     @NotNull
     @NotEmpty
@@ -40,15 +41,52 @@ public class MusicBand implements Comparable<MusicBand> {
     @NotNull
     private Album bestAlbum; // Поле не может быть null
 
+    /**
+     * Constructor with specified id
+     * 
+     * @param id
+     * @param name
+     * @param coordinates
+     * @param creationDate
+     * @param numberOfParticipants
+     * @param singlesCount
+     * @param genre
+     * @param bestAlbum 
+     */
     public MusicBand(long id, String name, Coordinates coordinates, LocalDate creationDate, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
-        this.id = id;
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate = creationDate;
-        this.numberOfParticipants = numberOfParticipants;
-        this.singlesCount = singlesCount;
-        this.genre = genre;
-        this.bestAlbum = bestAlbum;
+        this.setId(id);
+        this.setName(name);
+        this.setCoordinates(coordinates);
+        this.setCreationDate(creationDate);
+        this.setNumberOfParticipants(numberOfParticipants);
+        this.setSinglesCount(singlesCount);
+        this.setGenre(genre);
+        this.setBestAlbum(bestAlbum);
+    }
+    
+    /**
+     * Constructor without specified id, it will be safely generated
+     * 
+     * @param name
+     * @param coordinates
+     * @param creationDate
+     * @param numberOfParticipants
+     * @param singlesCount
+     * @param genre
+     * @param bestAlbum 
+     */
+    public MusicBand(String name, Coordinates coordinates, LocalDate creationDate, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
+        
+        this(
+                MusicBand.generateId(),
+                name,
+                coordinates,
+                creationDate,
+                numberOfParticipants,
+                singlesCount,
+                genre,
+                bestAlbum
+        );
     }
    
     public long getId() {
@@ -82,13 +120,27 @@ public class MusicBand implements Comparable<MusicBand> {
     public Album getBestAlbum() {
         return bestAlbum;
     }
-
+    
+    private static long generateId() {
+        long result = Math.abs(UUID.randomUUID().getLeastSignificantBits());
+        if (result == 0) result = MusicBand.generateId();
+        return result;
+    }
+    
+    private void setId(long id) {
+        if (this.id <= -1) this.id = id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+    
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
 
     public void setNumberOfParticipants(Long numberOfParticipants) {
@@ -129,7 +181,7 @@ public class MusicBand implements Comparable<MusicBand> {
 
     @Override
     public String toString() {
-        return "MusicBand{" +
+        return "MusicBand={" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", coordinates=" + coordinates +

@@ -19,6 +19,4 @@ import java.lang.annotation.Target;
 public @interface MaxValue {
      long maxValue();
      String showMessage() default "value must be below {0}";
-     
-     
 }
