@@ -4,11 +4,15 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  *
  * @author DEVELOPER
  */
-public class Album {
+public class Album implements Comparable<Album> {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long tracks = null; //Поле может быть null, Значение поля должно быть больше 0
     
@@ -36,6 +40,15 @@ public class Album {
     @Override
     public String toString() {
         return "Album={name='" + getName() + "', tracks='" + Long.toString(getTracks()) + "'}";
+    }
+    
+    @Override
+    public int compareTo(Album otherAlbum) {
+        int result = this.name.compareTo(otherAlbum.name);
+        
+        if (result == 0) result = this.tracks.compareTo(otherAlbum.tracks);
+        
+        return result;
     }
     
     // ==== Validatable interface overrides ==== //

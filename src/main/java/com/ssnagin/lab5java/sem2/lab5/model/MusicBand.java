@@ -14,7 +14,7 @@ import java.util.Objects;
  * Class for describing Music Bands
  * @author DEVELOPER
  */
-public class MusicBand {
+public class MusicBand implements Comparable<MusicBand> {
     @NotNull
     private long id; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
@@ -139,5 +139,16 @@ public class MusicBand {
                 ", genre=" + genre +
                 ", bestAlbum=" + bestAlbum +
                 '}';
+    }
+    
+    @Override
+    public int compareTo(MusicBand otherMusicBand) {
+        int result = this.name.compareTo(otherMusicBand.name);
+        
+        if (result == 0) this.creationDate.compareTo(otherMusicBand.getCreationDate());
+        
+        if (result == 0) this.coordinates.compareTo(otherMusicBand.getCoordinates());
+        
+        return result;
     }
 }
