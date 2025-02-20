@@ -9,5 +9,9 @@ package com.ssnagin.lab5java.sem2.lab5.commands;
  * @author developer
  */
 public class CommandManager {
+    // Command parsing:
+    // 
+    // @ _ @ > {command} [arguments];
+    
     
 }

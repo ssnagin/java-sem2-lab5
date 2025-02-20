@@ -4,6 +4,7 @@
 package com.ssnagin.lab5java.sem2.lab5;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.io.IOTool;
 import com.ssnagin.lab5java.sem2.lab5.model.Album;
@@ -49,6 +50,5 @@ public class App {
             MusicGenre.MATH_ROCK,
             new Album("Test", (long) 123)
         ));
-        System.out.print(collectionManager.toString());
     }
 }
