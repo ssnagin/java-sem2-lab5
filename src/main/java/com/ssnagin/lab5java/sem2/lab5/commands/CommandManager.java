@@ -4,14 +4,17 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 /**
  *
  * @author developer
  */
+@EqualsAndHashCode
+@ToString
 public class CommandManager {
     // Command parsing:
     // 
     // @ _ @ > {command} [arguments];
-    
-    
 }

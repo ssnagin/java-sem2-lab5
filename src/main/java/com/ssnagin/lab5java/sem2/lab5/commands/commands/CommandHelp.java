@@ -7,7 +7,8 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 
 /**
- *
+ * Shows brief description about available commands
+ * 
  * @author developer
  */
 public class CommandHelp extends Command {
@@ -15,5 +16,4 @@ public class CommandHelp extends Command {
     public CommandHelp(String name, String description) {
         super(name, description);
     }
-    
 }

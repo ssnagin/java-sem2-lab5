@@ -4,10 +4,15 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 /**
  * A basic class that defines all commands
  * @author developer
  */
+@EqualsAndHashCode
+@ToString
 public abstract class Command {
     
     private String name;
@@ -32,18 +37,5 @@ public abstract class Command {
     
     public String getDescription() {
         return this.description;
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        
-        result.append(this.getClass().getSimpleName())
-               .append("={name")
-               .append(name)
-               .append(", description=")
-               .append(description)
-               .append("}");
-        return result.toString();
     }
 }

@@ -10,11 +10,13 @@ import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
+import lombok.EqualsAndHashCode;
 
 /**
  * Class for describing Music Bands
  * @author DEVELOPER
  */
+@EqualsAndHashCode
 public class MusicBand implements Comparable<MusicBand> {
     @NotNull @PositiveNumber
     private long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -159,25 +161,25 @@ public class MusicBand implements Comparable<MusicBand> {
         this.bestAlbum = bestAlbum;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof MusicBand)) return false;
-        MusicBand musicBand = (MusicBand) object;
-        return id == musicBand.id &&
-                name.equals(musicBand.name) &&
-                coordinates.equals(musicBand.coordinates) &&
-                creationDate.equals(musicBand.creationDate) &&
-                numberOfParticipants.equals(musicBand.numberOfParticipants) &&
-                Objects.equals(singlesCount, musicBand.singlesCount) &&
-                genre == musicBand.genre &&
-                bestAlbum.equals(musicBand.bestAlbum);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, coordinates, creationDate, numberOfParticipants, singlesCount, genre, bestAlbum);
-    }
+//    @Override
+//    public boolean equals(Object object) {
+//        if (this == object) return true;
+//        if (!(object instanceof MusicBand)) return false;
+//        MusicBand musicBand = (MusicBand) object;
+//        return id == musicBand.id &&
+//                name.equals(musicBand.name) &&
+//                coordinates.equals(musicBand.coordinates) &&
+//                creationDate.equals(musicBand.creationDate) &&
+//                numberOfParticipants.equals(musicBand.numberOfParticipants) &&
+//                Objects.equals(singlesCount, musicBand.singlesCount) &&
+//                genre == musicBand.genre &&
+//                bestAlbum.equals(musicBand.bestAlbum);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, name, coordinates, creationDate, numberOfParticipants, singlesCount, genre, bestAlbum);
+//    }
 
     @Override
     public String toString() {
