@@ -38,12 +38,14 @@ public class Console {
         }
 
         String prepared = leftSide + "| " + text.toString();
-        Console.print(prepared);
+        Console.println(prepared);
     }
 
     public static void print(Object text) {
-        System.out.println(text.toString());
+        System.out.print(text.toString());
     }
     
-    
+    public static void println(Object text) {
+        System.out.println(text.toString());
+    }
 }

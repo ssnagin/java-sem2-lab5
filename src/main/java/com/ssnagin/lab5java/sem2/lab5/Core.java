@@ -41,7 +41,6 @@ public class Core {
     }
 
     public void run() {
-        
         // Step-by-step description of the algorithm.
         
         // 0. First, print logo
@@ -56,23 +55,27 @@ public class Core {
         
         while (true) {
             try {
-                System.out.print(console.getShellArrow());
+                
+                Console.print(console.getShellArrow());
                 
                 parsedString = InputParser.parse(scanner.nextLine());
                 
                 // 1.1 If the string is null, skip the code:
+
                 if (parsedString.isEmpty()) {
                     // ... some code
                     continue;
                 }
                 
-                if (parsedString.equals("exit")) {
+                // 1.2 Handling exit
+                
+                if (parsedString.getCommand().equals("exit")) {
                     // ... some code
                     // ...and exit!
                     break;
                 }
                 
-            } catch (Exception exception) {
+            } catch (NullPointerException exception) {
                 Console.error(exception);
             }
         }

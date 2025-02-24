@@ -4,23 +4,29 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.inputParser;
 
+import java.util.ArrayList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  *
  * @author developer
  */
+@ToString
+@EqualsAndHashCode
 public class ParsedString {
     
-    private String command = null;
-    private List<String> arguments = null;
+    private String command = "";
+    private List<String> arguments;
     
     public ParsedString(String command, String arguments) {
-        
+        this();
     }
     
     public ParsedString() {
-        
+        this.arguments = new ArrayList<>();
+
     }
     
     public void setCommand(String command) {
@@ -39,7 +45,18 @@ public class ParsedString {
         this.arguments.add(argument);
     }
     
+    public void addFromStream(String someText) {
+        if (someText == null) return;
+        
+        if (!(this.getCommand().equals(""))) {
+            this.addArgument(someText); 
+            return;
+        }
+        
+        this.setCommand(someText);
+    }
+    
     public boolean isEmpty() {
-        return this.getCommand().equals(null) || this.getCommand().equals("");
+        return this.getCommand() == null || this.getCommand().equals("");
     }
 }
