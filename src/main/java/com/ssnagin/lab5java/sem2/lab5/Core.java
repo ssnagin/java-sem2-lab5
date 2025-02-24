@@ -6,7 +6,10 @@ package com.ssnagin.lab5java.sem2.lab5;
 
 import com.ssnagin.lab5java.sem2.lab5.inputParser.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.inputParser.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
@@ -40,10 +43,14 @@ public class Core {
     
     public Core() {
         this.collectionManager = new CollectionManager();
-        this.commandManager = new CommandManager();
         this.validationController = new ValidationController();
         this.inputParser = new InputParser();
         this.console = new Console();
+        
+        this.commandManager = new CommandManager() {{
+           register(new CommandExit("exit", "exit this useless piece of masterpiece"));
+           register(new CommandHelp("help", "display help on available commands", this));
+        }};
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -62,7 +69,7 @@ public class Core {
         ParsedString parsedString;
         
         while (true) {
-            try {
+//            try {
                 
                 Console.print(console.getShellArrow());
                 
@@ -78,9 +85,9 @@ public class Core {
                 // 2 Executing commands according to user's input\
                 this.execute(parsedString);
                 
-            } catch (NullPointerException exception) {
-                Console.error(exception);
-            }
+//            } catch (NullPointerException exception) {
+//                Console.error(exception);
+//            }
         }
     }
     
@@ -90,11 +97,8 @@ public class Core {
     
     private void execute(ParsedString parsedString) {
         
-        // 0. check if command is exiting:
-        
-        if (parsedString.getCommand().equals("exit")) {
-            this.setApplicationStatus(ApplicationStatus.EXIT);
-        }
+        Command command = this.commandManager.get(parsedString.getCommand());
+        this.setApplicationStatus(command.execute());
     }
     
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

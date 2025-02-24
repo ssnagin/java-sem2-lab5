@@ -60,7 +60,6 @@ public class App {
         */
         
         CollectionManager collectionManager = new CollectionManager();
-        CommandManager commandManager = new CommandManager();
         ValidationController validationController = new ValidationController();
         
         collectionManager.addElement(new MusicBand(

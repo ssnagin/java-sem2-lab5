@@ -18,6 +18,7 @@ public abstract class Command {
     
     private String name;
     private String description;
+
     
     public Command(String name, String description) {
         this.setName(name);
