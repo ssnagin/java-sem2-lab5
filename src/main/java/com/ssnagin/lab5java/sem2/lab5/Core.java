@@ -24,6 +24,8 @@ public class Core {
     InputParser inputParser;
     Console console;
     
+    ApplicationStatus applicationStatus;
+    
     public static final String ASCII_LOGO = " ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
                                             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
                                             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
@@ -37,7 +39,9 @@ public class Core {
         this.commandManager = new CommandManager();
         this.validationController = new ValidationController();
         this.inputParser = new InputParser();
-        this.console = new Console();   
+        this.console = new Console();
+        
+        this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
 
     public void run() {
@@ -67,13 +71,8 @@ public class Core {
                     continue;
                 }
                 
-                // 1.2 Handling exit
-                
-                if (parsedString.getCommand().equals("exit")) {
-                    // ... some code
-                    // ...and exit!
-                    break;
-                }
+                // 2 Executing commands according to user's input\
+                this.execute(parsedString);
                 
             } catch (NullPointerException exception) {
                 Console.error(exception);
@@ -82,6 +81,38 @@ public class Core {
     }
     
     public void printLogo() {
-        Console.print(this.ASCII_LOGO);
+        Console.print(Core.ASCII_LOGO);
+    }
+    
+    private void execute(ParsedString parsedString) {
+        
+        // 0. check if command is exiting:
+        
+        if (parsedString.getCommand().equals("exit")) {
+            this.setApplicationStatus(ApplicationStatus.EXIT);
+        }
+        
+    }
+    
+    private void setApplicationStatus(ApplicationStatus applicationStatus) {
+
+        this.applicationStatus = applicationStatus;
+        
+        if (applicationStatus != ApplicationStatus.RUNNING) {
+            this.onExit();
+        }
+    }
+    
+    public ApplicationStatus getApplicationStatus() {
+        return this.applicationStatus;
+    }
+    
+    // === EVENTS ==== //
+    
+    public void onExit() {
+        // Some code here, for example saving json.
+        
+        Console.separatePrint("Bye, have a great time!", this.getApplicationStatus().toString());
+        System.exit(this.getApplicationStatus().getCode());
     }
 }

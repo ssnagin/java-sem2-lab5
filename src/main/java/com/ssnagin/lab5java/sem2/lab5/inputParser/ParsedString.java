@@ -20,17 +20,19 @@ public class ParsedString {
     private String command = "";
     private List<String> arguments;
     
-    public ParsedString(String command, String arguments) {
+    public ParsedString(String command, List<String> arguments) {
         this();
+        
+        this.setCommand(command);
+        this.addArguments(arguments);
     }
     
     public ParsedString() {
         this.arguments = new ArrayList<>();
-
     }
     
     public void setCommand(String command) {
-        this.command = command;
+        this.command = command.toLowerCase();
     }
     
     public String getCommand() {
@@ -43,6 +45,12 @@ public class ParsedString {
     
     public void addArgument(String argument) {
         this.arguments.add(argument);
+    }
+    
+    public void addArguments(List<String> arguments) {
+        for (String argument : arguments) {
+            this.addArgument(argument);
+        }
     }
     
     public void addFromStream(String someText) {
