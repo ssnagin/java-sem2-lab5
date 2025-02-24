@@ -17,7 +17,7 @@ import lombok.ToString;
 public abstract class Command {
     
     private String name;
-    private String description;
+    public String description;
 
     
     public Command(String name, String description) {

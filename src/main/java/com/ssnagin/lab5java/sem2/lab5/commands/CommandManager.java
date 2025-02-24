@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandDefault;
 import com.ssnagin.lab5java.sem2.lab5.commands.interfaces.Manageable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- *
+ * 
  * @author developer
  */
 @EqualsAndHashCode
@@ -29,7 +30,8 @@ public class CommandManager implements Manageable<Command> {
 
     @Override
     public Command get(String commandName) {
-        return commands.get(commandName);
+        Command command = commands.get(commandName);
+        return (command != null) ? command : new CommandDefault("", "");
     }
     
     public List<Command> getCommands() {  

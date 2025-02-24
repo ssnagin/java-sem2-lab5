@@ -69,25 +69,19 @@ public class Core {
         ParsedString parsedString;
         
         while (true) {
-//            try {
-                
-                Console.print(console.getShellArrow());
-                
-                parsedString = InputParser.parse(scanner.nextLine());
-                
-                // 1.1 If the string is null, skip the code:
+            Console.print(console.getShellArrow());
 
-                if (parsedString.isEmpty()) {
-                    // ... some code
-                    continue;
-                }
-                
-                // 2 Executing commands according to user's input\
-                this.execute(parsedString);
-                
-//            } catch (NullPointerException exception) {
-//                Console.error(exception);
-//            }
+            parsedString = InputParser.parse(scanner.nextLine());
+
+            // 1.1 If the string is null, skip the code:
+
+            if (parsedString.isEmpty()) {
+                // ... some code
+                continue;
+            }
+
+            // 2 Executing commands according to user's input\
+            this.execute(parsedString);
         }
     }
     
