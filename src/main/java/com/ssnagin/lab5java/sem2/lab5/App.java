@@ -11,11 +11,15 @@ import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.time.LocalDate;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * Entry script for running main core app
+ * Entry script for running Application
  * @author developer
  */
+@EqualsAndHashCode
+@ToString
 public class App {
     public static void main(String[] args) {
         

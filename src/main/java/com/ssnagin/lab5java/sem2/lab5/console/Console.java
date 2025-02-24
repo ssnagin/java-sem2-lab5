@@ -4,10 +4,15 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.console;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 /**
  * Main class that responsible for console interactions
  * @author developer
  */
+@EqualsAndHashCode
+@ToString
 public class Console {
     private final String SHELL_ARROW = " @ _ @ > ";
     

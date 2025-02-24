@@ -4,6 +4,9 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import com.ssnagin.lab5java.sem2.lab5.commands.interfaces.Manageable;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -13,8 +16,17 @@ import lombok.ToString;
  */
 @EqualsAndHashCode
 @ToString
-public class CommandManager {
-    // Command parsing:
-    // 
-    // @ _ @ > {command} [arguments];
+public class CommandManager implements Manageable<Command> {
+    
+    private Map<String, Command> commands = new HashMap<>();
+
+    @Override
+    public void register(Command command) {
+        commands.put(command.getName(), command);
+    }
+
+    @Override
+    public Command get(String commandName) {
+        return commands.get(commandName);
+    }
 }

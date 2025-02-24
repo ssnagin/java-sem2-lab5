@@ -11,18 +11,22 @@ import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.inputParser.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.util.Scanner;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * 
  * @author developer
  */
+@ToString
+@EqualsAndHashCode
 public class Core {
     
-    CollectionManager collectionManager;
-    CommandManager commandManager;
-    ValidationController validationController;
-    InputParser inputParser;
-    Console console;
+    private CollectionManager collectionManager;
+    private CommandManager commandManager;
+    private ValidationController validationController;
+    private InputParser inputParser;
+    private Console console;
     
     ApplicationStatus applicationStatus;
     
@@ -91,7 +95,6 @@ public class Core {
         if (parsedString.getCommand().equals("exit")) {
             this.setApplicationStatus(ApplicationStatus.EXIT);
         }
-        
     }
     
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

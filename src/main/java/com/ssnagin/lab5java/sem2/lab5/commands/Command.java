@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -38,4 +39,6 @@ public abstract class Command {
     public String getDescription() {
         return this.description;
     }
+    
+    public abstract ApplicationStatus execute();
 }

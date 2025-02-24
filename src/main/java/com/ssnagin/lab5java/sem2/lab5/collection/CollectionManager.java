@@ -13,7 +13,7 @@ import java.util.TreeSet;
  */
 public class CollectionManager {
     
-    private TreeSet<MusicBand> collection = new TreeSet();
+    private final TreeSet<MusicBand> collection = new TreeSet<>();
     
     public void addElement(MusicBand element) {
         this.collection.add(element);
@@ -60,7 +60,7 @@ public class CollectionManager {
         StringBuilder result = new StringBuilder();
         
         if (this.collection.isEmpty()) {
-            result.append("My stomache is as empty as this Collection...");
+            result.append("My stomach is as empty as this Collection...");
             return result.toString();
         }
         
