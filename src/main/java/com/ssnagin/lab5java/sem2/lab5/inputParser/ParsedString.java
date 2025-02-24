@@ -40,7 +40,6 @@ public class ParsedString {
     }
     
     public boolean isEmpty() {
-        
-        return this.getCommand().equals(null) || this.getCommand().equals("") ? true : false;
+        return this.getCommand().equals(null) || this.getCommand().equals("");
     }
 }

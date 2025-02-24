@@ -5,10 +5,10 @@ package com.ssnagin.lab5java.sem2.lab5;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
-import com.ssnagin.lab5java.sem2.lab5.model.Album;
-import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.time.LocalDate;
 
