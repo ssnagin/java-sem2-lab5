@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.ssnagin.lab5java.sem2.lab5.model;
+package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author DEVELOPER
  */
+@EqualsAndHashCode
 public class Album implements Comparable<Album> {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long tracks = null; //Поле может быть null, Значение поля должно быть больше 0
@@ -50,41 +49,4 @@ public class Album implements Comparable<Album> {
         
         return result;
     }
-    
-    // ==== Validatable interface overrides ==== //
-    
-//    @Override
-//    public boolean isValid() {
-//        return isNameValid() && isTracksValid();
-//    }
-//    
-//    @Override
-//    public String parseValidationError() {
-//       /** 
-//        * StringBuidler instead of String:
-//        * pros:
-//        * works with a single instance (object), which can be modified via
-//        * append(), delete(), insert(), replace(), reverse()
-//        */ 
-//        StringBuilder results = new StringBuilder();
-//        results.append("");
-//        
-//        if (isNameValid()) {
-//            results.append("name cannot be null");
-//        }
-//        if (isTracksValid()) {
-//            results.append("tracks can be only positive");
-//        }
-//        
-//        
-//        return results.toString();
-//    }
-//
-//    private boolean isNameValid() {
-//        return (this.name == null || this.name.equals("")) ? false : true;
-//    }
-//
-//    private boolean isTracksValid() {
-//        return tracks <= 0 ? false : true;
-//    }
 }

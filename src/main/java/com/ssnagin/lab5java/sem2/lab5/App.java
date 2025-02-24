@@ -5,17 +5,41 @@ package com.ssnagin.lab5java.sem2.lab5;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
-import com.ssnagin.lab5java.sem2.lab5.io.IOTool;
-import com.ssnagin.lab5java.sem2.lab5.model.Album;
-import com.ssnagin.lab5java.sem2.lab5.model.Coordinates;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.model.MusicGenre;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.time.LocalDate;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+/**
+ * Entry script for running Application
+ * @author developer
+ */
+@EqualsAndHashCode
+@ToString
 public class App {
     public static void main(String[] args) {
-        App.run();
+        
+        /*
+        
+        Code for the future
+        
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().toString());
+        }
+        */
+        
+        Core core = new Core();
+        core.run();
     }
     
     public static void run() {
@@ -36,8 +60,6 @@ public class App {
         */
         
         CollectionManager collectionManager = new CollectionManager();
-        CommandManager commandManager = new CommandManager();
-        IOTool inputOutputHandler = new IOTool();
         ValidationController validationController = new ValidationController();
         
         collectionManager.addElement(new MusicBand(
@@ -49,6 +71,7 @@ public class App {
             MusicGenre.MATH_ROCK,
             new Album("Test", (long) 123)
         ));
-        System.out.print(collectionManager.toString());
+        
+        
     }
 }

@@ -4,10 +4,42 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
+import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 /**
  * A basic class that defines all commands
  * @author developer
  */
+@EqualsAndHashCode
+@ToString
 public abstract class Command {
     
+    private String name;
+    private String description;
+
+    
+    public Command(String name, String description) {
+        this.setName(name);
+        this.setDescription(description);
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public abstract ApplicationStatus execute();
 }
