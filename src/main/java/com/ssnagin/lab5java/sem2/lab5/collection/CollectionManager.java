@@ -13,6 +13,8 @@ import java.util.TreeSet;
  */
 public class CollectionManager {
     
+    // Remake this with interpretator 
+    
     private final TreeSet<MusicBand> collection = new TreeSet<>();
     
     public void addElement(MusicBand element) {
