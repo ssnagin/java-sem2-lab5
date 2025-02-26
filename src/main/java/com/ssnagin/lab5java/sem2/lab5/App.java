@@ -4,7 +4,6 @@
 package com.ssnagin.lab5java.sem2.lab5;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
-import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;

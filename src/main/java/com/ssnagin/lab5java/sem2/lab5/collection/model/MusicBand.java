@@ -8,7 +8,6 @@ import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.UUID;
 import lombok.EqualsAndHashCode;
 
