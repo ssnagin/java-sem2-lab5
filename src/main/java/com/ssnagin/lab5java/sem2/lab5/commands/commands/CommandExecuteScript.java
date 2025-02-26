@@ -8,6 +8,8 @@ import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
+import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
+import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 
 /**
@@ -15,26 +17,28 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
  * 
  * @author developer
  */
-public class CommandHelp extends Command {
+public class CommandExecuteScript extends Command {
     
     private CommandManager commandManager;
     
-    private String temporaryCreatedHeadMessage = "CollectionManager is a nice tool though.\nHere are available commands:\n";
-    
-    public CommandHelp(String name, String description, CommandManager commandManager) {
+    public CommandExecuteScript(String name, String description, CommandManager commandManager) {
         super(name, description);
-        
         this.commandManager = commandManager;
     }
 
     @Override
     public ApplicationStatus execute(ParsedString parsedString) {
-        Console.println(temporaryCreatedHeadMessage);
+        // FOR THE FUTURE:
+        // This command requires uri string, so we will have to edit ParsedString to ParseMode.URI !!!
         
-        for (Command command : this.commandManager.getCommands()) {
-            Console.println(command.getName() + "   " + command.getDescription());
-        }
+        parsedString = InputParser.parse(parsedString.getRowArguments(), ParseMode.COMMAND_ONLY);
         
-        return ApplicationStatus.RUNNING;
+        // temporary solution without reading files
+        
+        Console.log(parsedString);
+        
+        Command command = this.commandManager.get(parsedString.getCommand());
+        
+        return command.execute(parsedString);
     }
 }
