@@ -15,16 +15,14 @@ import lombok.ToString;
 @ToString
 public class Console {
     
-    // Using singletone
-    
-    private final String SHELL_ARROW = " @ _ @ > ";
+    private static final String SHELL_ARROW = " @ _ @ > ";
     
     public Console() {
         
     }
     
-    public String getShellArrow() {
-        return this.SHELL_ARROW;
+    public static String getShellArrow() {
+        return SHELL_ARROW;
     }
     
     public static void log(Object text) {

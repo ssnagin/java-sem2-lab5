@@ -74,7 +74,7 @@ public class Core {
         
         while (true) {
             
-            Console.print(console.getShellArrow());
+            Console.print(Console.getShellArrow());
             
             // I need to replace this code for the future custom input (execute from script) integration.
             
