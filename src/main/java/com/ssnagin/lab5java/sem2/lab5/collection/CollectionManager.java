@@ -63,6 +63,14 @@ public class CollectionManager {
         return this.collection.first();
     }
     
+    public int getSize() {
+        return this.collection.size();
+    }
+    
+    public TreeSet<MusicBand> getCollection() {
+        return this.collection;
+    }
+    
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

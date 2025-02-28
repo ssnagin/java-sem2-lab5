@@ -21,7 +21,7 @@ public abstract class Entity<T> implements Describable, Comparable<T> {
      * @return 
      */
     public String getDescription() {
-        Field[] fields = this.getClass().getDeclaredFields();
+        Field[] fields = Entity.class.getDeclaredFields();
         StringBuilder stringBuilder = new StringBuilder();
         
         stringBuilder.append("Объекты ").append(
