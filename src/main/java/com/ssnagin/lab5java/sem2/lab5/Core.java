@@ -8,6 +8,7 @@ import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandAdd;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
@@ -31,7 +32,6 @@ public class Core {
     private CommandManager commandManager;
     private ValidationController validationController;
     private InputParser inputParser;
-    private Console console;
     
     ApplicationStatus applicationStatus;
     
@@ -44,15 +44,15 @@ public class Core {
                                             "  ver. 1.0 | github.com/ssnagin/java-sem2-lab5.git                ▐▙▄▞▘        \n\n";
     
     public Core() {
-        this.collectionManager = new CollectionManager();
+        this.collectionManager = CollectionManager.getInstance();
         this.validationController = new ValidationController();
         this.inputParser = new InputParser();
-        this.console = new Console();
         
         this.commandManager = new CommandManager() {{
            register(new CommandExit("exit", "exit this useless piece of masterpiece"));
            register(new CommandHelp("help", "display help on available commands", this));
            register(new CommandExecuteScript("execute_script", "some description here", this));
+           register(new CommandAdd("add", "add an object to collection", collectionManager));
         }};
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);

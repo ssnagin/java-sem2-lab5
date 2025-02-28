@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import java.util.Objects;
 import lombok.EqualsAndHashCode;
@@ -15,11 +16,19 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class Coordinates implements Comparable<Coordinates> {
     @MaxValue(maxValue=180)
+    @Description(
+        name="координата х", 
+        description="какое-то описание"
+    )
     private Long x = null; //Максимальное значение поля: 180. (Так как long может быть null, ставим Long вместо long)
     
     @MaxValue(maxValue=750)
+    @Description(
+        name="координата y", 
+        description="какое-то описание"
+    )
     private Integer y; //Максимальное значение поля: 750, Поле не может быть null
-    
+
     public Coordinates(Long x, Integer y) {
         setX(x);
         setY(y);

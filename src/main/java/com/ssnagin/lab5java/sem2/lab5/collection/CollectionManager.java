@@ -13,9 +13,15 @@ import java.util.TreeSet;
  */
 public class CollectionManager {
     
-    // Remake this with interpretator 
+    // Using singleton
+    
+    private static final CollectionManager instance = new CollectionManager();
     
     private final TreeSet<MusicBand> collection = new TreeSet<>();
+    
+    public static CollectionManager getInstance() {
+        return instance;
+    }
     
     public void addElement(MusicBand element) {
         this.collection.add(element);

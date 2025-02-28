@@ -14,6 +14,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Console {
+    
+    // Using singletone
+    
     private final String SHELL_ARROW = " @ _ @ > ";
     
     public Console() {
