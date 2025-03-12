@@ -4,14 +4,17 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
-import com.ssnagin.lab5java.sem2.lab5.inputParser.InputParser;
+import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandAdd;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
-import com.ssnagin.lab5java.sem2.lab5.inputParser.ParsedString;
+import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
+import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.util.Scanner;
 import lombok.EqualsAndHashCode;
@@ -29,7 +32,6 @@ public class Core {
     private CommandManager commandManager;
     private ValidationController validationController;
     private InputParser inputParser;
-    private Console console;
     
     ApplicationStatus applicationStatus;
     
@@ -42,20 +44,22 @@ public class Core {
                                             "  ver. 1.0 | github.com/ssnagin/java-sem2-lab5.git                ▐▙▄▞▘        \n\n";
     
     public Core() {
-        this.collectionManager = new CollectionManager();
+        this.collectionManager = CollectionManager.getInstance();
         this.validationController = new ValidationController();
         this.inputParser = new InputParser();
-        this.console = new Console();
         
         this.commandManager = new CommandManager() {{
            register(new CommandExit("exit", "exit this useless piece of masterpiece"));
            register(new CommandHelp("help", "display help on available commands", this));
+           register(new CommandExecuteScript("execute_script", "some description here", this));
+           register(new CommandAdd("add", "add an object to collection", collectionManager));
         }};
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
 
-    public void run() {
+    public void start() {
+        
         // Step-by-step description of the algorithm.
         
         // 0. First, print logo
@@ -69,9 +73,15 @@ public class Core {
         ParsedString parsedString;
         
         while (true) {
-            Console.print(console.getShellArrow());
+            
+            Console.print(Console.getShellArrow());
+            
+            // I need to replace this code for the future custom input (execute from script) integration.
+            
 
-            parsedString = InputParser.parse(scanner.nextLine());
+            parsedString = new ParsedString(scanner.nextLine());
+            
+            parsedString = InputParser.parse(parsedString.getPureString(), ParseMode.COMMAND_ONLY);
 
             // 1.1 If the string is null, skip the code:
 
@@ -80,8 +90,8 @@ public class Core {
                 continue;
             }
 
-            // 2 Executing commands according to user's input\
-            this.execute(parsedString);
+            // 2 Executing commands according to user's input
+            this.runCommand(parsedString);
         }
     }
     
@@ -89,10 +99,10 @@ public class Core {
         Console.print(Core.ASCII_LOGO);
     }
     
-    private void execute(ParsedString parsedString) {
-        
+    private void runCommand(ParsedString parsedString) {
+
         Command command = this.commandManager.get(parsedString.getCommand());
-        this.setApplicationStatus(command.execute());
+        this.setApplicationStatus(command.execute(parsedString));
     }
     
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

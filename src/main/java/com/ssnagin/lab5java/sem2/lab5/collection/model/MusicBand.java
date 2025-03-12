@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
@@ -15,31 +16,61 @@ import lombok.EqualsAndHashCode;
  * Class for describing Music Bands
  * @author DEVELOPER
  */
-@EqualsAndHashCode
-public class MusicBand implements Comparable<MusicBand> {
-    @NotNull @PositiveNumber
+@EqualsAndHashCode(callSuper=true)
+public class MusicBand extends Entity<MusicBand> {
+    
+    @NotNull 
+    @PositiveNumber
     private long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
     @NotNull
     @NotEmpty
+    @Description(
+            name="имя", 
+            description="Название музыкальной группы"
+    )
     private String name; // Поле не может быть null, Строка не может быть пустой
     
     @NotNull
+    @Description(
+        name="координаты", 
+        description="Какие-то координаты музыкальной группы"
+    )
     private Coordinates coordinates; // Поле не может быть null
     
     @NotNull
+    @Description(
+        name="дата создания", 
+        description="Название музыкальной группы"
+    )
     private LocalDate creationDate; // Поле не может быть null, Значение этого поля должно генерироваться автоматически
     
     @NotNull
     @PositiveNumber
+    @Description(
+        name="количество участников", 
+        description="количество участников данной группы"
+    )
     private Long numberOfParticipants; // Поле не может быть null, Значение поля должно быть больше 0
     
     @PositiveNumber
+    @Description(
+        name="количество синглов", 
+        description="сколько синглов выпустила данная группа"
+    )
     private Integer singlesCount; // Поле может быть null, Значение поля должно быть больше 0
     
+    @Description(
+        name="жанр музыки", 
+        description="жанр музыки"
+    )
     private MusicGenre genre = null; // Поле может быть null
     
     @NotNull
+    @Description(
+        name="лучший альбом", 
+        description="какой-то лучший альбом"
+    )
     private Album bestAlbum; // Поле не может быть null
 
     /**
@@ -159,26 +190,6 @@ public class MusicBand implements Comparable<MusicBand> {
     public void setBestAlbum(Album bestAlbum) {
         this.bestAlbum = bestAlbum;
     }
-
-//    @Override
-//    public boolean equals(Object object) {
-//        if (this == object) return true;
-//        if (!(object instanceof MusicBand)) return false;
-//        MusicBand musicBand = (MusicBand) object;
-//        return id == musicBand.id &&
-//                name.equals(musicBand.name) &&
-//                coordinates.equals(musicBand.coordinates) &&
-//                creationDate.equals(musicBand.creationDate) &&
-//                numberOfParticipants.equals(musicBand.numberOfParticipants) &&
-//                Objects.equals(singlesCount, musicBand.singlesCount) &&
-//                genre == musicBand.genre &&
-//                bestAlbum.equals(musicBand.bestAlbum);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, name, coordinates, creationDate, numberOfParticipants, singlesCount, genre, bestAlbum);
-//    }
 
     @Override
     public String toString() {

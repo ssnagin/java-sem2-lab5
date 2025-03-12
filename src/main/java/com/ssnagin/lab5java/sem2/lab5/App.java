@@ -38,7 +38,7 @@ public class App {
         */
         
         Core core = new Core();
-        core.run();
+        core.start();
     }
     
     public static void run() {

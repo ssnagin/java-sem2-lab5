@@ -4,6 +4,8 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -12,7 +14,17 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public class Album implements Comparable<Album> {
+    @NotNull
+    @Description(
+        name="имя", 
+        description="какое-то описание"
+    )
     private String name; //Поле не может быть null, Строка не может быть пустой
+    
+    @Description(
+        name="количество треков", 
+        description="какое-то описание"
+    )
     private Long tracks = null; //Поле может быть null, Значение поля должно быть больше 0
     
     public Album(String name, Long tracks) {

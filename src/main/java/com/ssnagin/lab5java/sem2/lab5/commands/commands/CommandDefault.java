@@ -8,6 +8,7 @@ import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
+import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
@@ -27,7 +28,7 @@ public class CommandDefault extends Command {
     }
 
     @Override
-    public ApplicationStatus execute() {
+    public ApplicationStatus execute(ParsedString parsedString) {
         Console.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;
     }

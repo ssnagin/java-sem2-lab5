@@ -6,6 +6,7 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
+import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 
 /**
  * Shows brief description about available commands
@@ -19,7 +20,7 @@ public class CommandExit extends Command {
     }
 
     @Override
-    public ApplicationStatus execute() {
+    public ApplicationStatus execute(ParsedString parsedString) {
         return ApplicationStatus.EXIT;
     }
 }
