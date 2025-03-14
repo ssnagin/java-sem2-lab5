@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
  *
  * @author DEVELOPER
  */
-@EqualsAndHashCode
-public class Album implements Comparable<Album> {
+@EqualsAndHashCode(callSuper=true)
+public class Album extends Entity<Album> {
     @NotNull
     @Description(
         name="имя", 

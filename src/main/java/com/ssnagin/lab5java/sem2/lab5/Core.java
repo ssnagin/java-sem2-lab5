@@ -45,6 +45,7 @@ public class Core {
                                             "  ver. 1.0 | github.com/ssnagin/java-sem2-lab5.git                ▐▙▄▞▘        \n\n";
     
     public Core() {
+        // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);

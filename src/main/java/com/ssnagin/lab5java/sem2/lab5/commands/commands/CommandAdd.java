@@ -8,6 +8,7 @@ import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
@@ -19,6 +20,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Shows brief description about available commands
@@ -50,11 +53,31 @@ public class CommandAdd extends Command {
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
         
         try {
-            var result = parseModel(MusicBand.class);
             
-            Console.print(result.toString());
-        } catch (Exception e) {
-            Console.error(e);
+            
+            var result = new LocalDateWrapper(
+                    parseModel(MusicBand.class)
+            );
+                    
+            Console.log(result.toString());
+            Console.log(result.getName());
+            
+            // Final validation here;
+            
+            // Adding into CollectionManager with Creation Date:
+            this.collectionManager.addElement(result);
+            
+            Console.separatePrint("Successfully added!", "SUCCESS");
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return ApplicationStatus.RUNNING;
@@ -77,7 +100,7 @@ public class CommandAdd extends Command {
             field.setAccessible(true);
             
             Description annotation = field.getAnnotation(Description.class);
-            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getType());
+            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType().toString());
             
             Object value = parseField(field.getType());
             setFieldValue(instance, field.getName(), value);

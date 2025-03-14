@@ -6,15 +6,14 @@ package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
-import java.util.Objects;
 import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author DEVELOPER
  */
-@EqualsAndHashCode
-public class Coordinates implements Comparable<Coordinates> {
+@EqualsAndHashCode(callSuper=true)
+public class Coordinates extends Entity<Coordinates> {
     @MaxValue(maxValue=180)
     @Description(
         name="координата х", 

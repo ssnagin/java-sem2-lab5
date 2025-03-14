@@ -5,6 +5,8 @@
 package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.console.Console;
+import java.util.Collection;
 import java.util.TreeSet;
 
 /**
@@ -25,6 +27,7 @@ public class CollectionManager {
     
     public void addElement(MusicBand element) {
         this.collection.add(element);
+        Console.separatePrint(element, "CM");
     }
     
     public MusicBand getElementById(long otherId) {
