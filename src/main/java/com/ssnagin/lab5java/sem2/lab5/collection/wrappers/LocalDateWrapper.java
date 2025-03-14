@@ -6,7 +6,6 @@ package com.ssnagin.lab5java.sem2.lab5.collection.wrappers;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import java.time.LocalDate;
-import lombok.Delegate;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -28,18 +27,18 @@ public class LocalDateWrapper extends MusicBand  {
     }
     
     public LocalDateWrapper(MusicBand base, LocalDate localDate) {
+        super(
+                base.getId(),
+                base.getName(),
+                base.getCoordinates(),
+                base.getNumberOfParticipants(),
+                base.getSinglesCount(),
+                base.getGenre(),
+                base.getBestAlbum()
+        );
         this.base = base;
         
         setLocalDate(localDate);
-        
-        this.setId(base.getId());
-        this.setBestAlbum(base.getBestAlbum());
-        this.setCoordinates(base.getCoordinates());
-        this.setGenre(base.getGenre());
-        this.setName(base.getName());
-        this.setNumberOfParticipants(base.getNumberOfParticipants());
-        this.setSinglesCount(base.getSinglesCount());
-        
     }
     
     public LocalDate getLocalDate() {

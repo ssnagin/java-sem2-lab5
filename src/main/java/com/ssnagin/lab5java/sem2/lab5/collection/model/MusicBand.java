@@ -162,7 +162,7 @@ public class MusicBand extends Entity<MusicBand> {
         return result;
     }
     
-    protected void setId(long id) {
+    private void setId(long id) {
         if (this.id <= -1) this.id = id;
     }
     
