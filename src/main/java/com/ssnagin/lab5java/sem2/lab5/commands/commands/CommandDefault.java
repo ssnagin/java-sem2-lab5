@@ -28,7 +28,7 @@ public class CommandDefault extends Command {
     }
 
     @Override
-    public ApplicationStatus execute(ParsedString parsedString) {
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
         Console.println(temporaryCreatedHeadMessage);
         return ApplicationStatus.RUNNING;
     }

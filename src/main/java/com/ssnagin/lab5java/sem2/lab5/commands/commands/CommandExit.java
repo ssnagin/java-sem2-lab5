@@ -20,7 +20,7 @@ public class CommandExit extends Command {
     }
 
     @Override
-    public ApplicationStatus execute(ParsedString parsedString) {
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
         return ApplicationStatus.EXIT;
     }
 }

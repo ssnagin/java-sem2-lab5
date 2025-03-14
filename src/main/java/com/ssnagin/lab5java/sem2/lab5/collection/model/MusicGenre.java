@@ -4,7 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 
 /**
  *

@@ -4,7 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
@@ -38,11 +38,6 @@ public class MusicBand extends Entity<MusicBand> {
     )
     private Coordinates coordinates; // Поле не может быть null
     
-    @NotNull
-    @Description(
-        name="дата создания", 
-        description="Название музыкальной группы"
-    )
     private LocalDate creationDate; // Поле не может быть null, Значение этого поля должно генерироваться автоматически
     
     @NotNull
@@ -119,6 +114,21 @@ public class MusicBand extends Entity<MusicBand> {
                 genre,
                 bestAlbum
         );
+    }
+    
+    /**
+     * Constructor for prepared statements
+     */
+    public MusicBand() {
+        this(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+                );
     }
    
     public long getId() {

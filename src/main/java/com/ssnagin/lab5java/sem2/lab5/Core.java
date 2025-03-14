@@ -30,11 +30,12 @@ public class Core {
     
     private CollectionManager collectionManager;
     private CommandManager commandManager;
-    private ValidationController validationController;
     private InputParser inputParser;
+    private Console console;
+    
+    private Scanner scanner;
     
     ApplicationStatus applicationStatus;
-    
     public static final String ASCII_LOGO = " ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
                                             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
                                             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
@@ -45,14 +46,14 @@ public class Core {
     
     public Core() {
         this.collectionManager = CollectionManager.getInstance();
-        this.validationController = new ValidationController();
         this.inputParser = new InputParser();
+        this.scanner = new Scanner(System.in);
         
         this.commandManager = new CommandManager() {{
            register(new CommandExit("exit", "exit this useless piece of masterpiece"));
            register(new CommandHelp("help", "display help on available commands", this));
            register(new CommandExecuteScript("execute_script", "some description here", this));
-           register(new CommandAdd("add", "add an object to collection", collectionManager));
+           register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
         }};
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);
@@ -76,7 +77,7 @@ public class Core {
             
             Console.print(Console.getShellArrow());
             
-            // I need to replace this code for the future custom input (execute from script) integration.
+            // I need to replace this code for the future custom input (executeCommand from script) integration.
             
 
             parsedString = new ParsedString(scanner.nextLine());
@@ -102,7 +103,7 @@ public class Core {
     private void runCommand(ParsedString parsedString) {
 
         Command command = this.commandManager.get(parsedString.getCommand());
-        this.setApplicationStatus(command.execute(parsedString));
+        this.setApplicationStatus(command.executeCommand(parsedString));
     }
     
     private void setApplicationStatus(ApplicationStatus applicationStatus) {

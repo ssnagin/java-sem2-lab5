@@ -4,7 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import java.util.Objects;
 import lombok.EqualsAndHashCode;
@@ -38,6 +38,10 @@ public class Coordinates implements Comparable<Coordinates> {
         this(null, y);
     }
     
+    public Coordinates() {
+        this(null, null);
+    }
+    
     public void setY(Integer y) {
         this.y = y;
     }
@@ -60,19 +64,6 @@ public class Coordinates implements Comparable<Coordinates> {
                 + "{x=" + Long.toString(x) + 
                 ", y=" + Integer.toString(y) + "}";
     }
-    
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Coordinates)) return false;
-//        Coordinates that = (Coordinates) o;
-//        return Objects.equals(x, that.x) && Objects.equals(y, that.y);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(x, y);
-//    } 
     
     @Override
     public int compareTo(Coordinates otherCoordinates) {
