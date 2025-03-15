@@ -64,7 +64,6 @@ public class App {
         collectionManager.addElement(new MusicBand(
             "test", 
             new Coordinates((long) 28, 1),
-            LocalDate.now(),
             1L, 
             1,
             MusicGenre.MATH_ROCK,

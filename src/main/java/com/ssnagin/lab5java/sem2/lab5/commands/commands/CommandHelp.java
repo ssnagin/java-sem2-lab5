@@ -28,7 +28,7 @@ public class CommandHelp extends Command {
     }
 
     @Override
-    public ApplicationStatus execute(ParsedString parsedString) {
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
         Console.println(temporaryCreatedHeadMessage);
         
         for (Command command : this.commandManager.getCommands()) {

@@ -27,7 +27,7 @@ public class CommandExecuteScript extends Command {
     }
 
     @Override
-    public ApplicationStatus execute(ParsedString parsedString) {
+    public ApplicationStatus executeCommand(ParsedString parsedString) {
         // FOR THE FUTURE:
         // This command requires uri string, so we will have to edit ParsedString to ParseMode.URI !!!
         
@@ -39,6 +39,6 @@ public class CommandExecuteScript extends Command {
         
         Command command = this.commandManager.get(parsedString.getCommand());
         
-        return command.execute(parsedString);
+        return command.executeCommand(parsedString);
     }
 }

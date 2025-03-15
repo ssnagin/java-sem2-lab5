@@ -4,14 +4,16 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.collection.interfaces.Describable;
 import java.lang.reflect.Field;
+import lombok.EqualsAndHashCode;
 
 /**
  *
  * @author developer
  */
+@EqualsAndHashCode
 public abstract class Entity<T> implements Describable, Comparable<T> {
     
     public abstract int compareTo(T object);

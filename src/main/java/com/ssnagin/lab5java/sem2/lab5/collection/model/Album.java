@@ -4,7 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import lombok.EqualsAndHashCode;
 
@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
  *
  * @author DEVELOPER
  */
-@EqualsAndHashCode
-public class Album implements Comparable<Album> {
+@EqualsAndHashCode(callSuper=true)
+public class Album extends Entity<Album> {
     @NotNull
     @Description(
         name="имя", 
@@ -30,6 +30,10 @@ public class Album implements Comparable<Album> {
     public Album(String name, Long tracks) {
         setName(name);
         setTracks(tracks);
+    }
+    
+    public Album() {
+        this(null, null);
     }
     
     public void setName(String name) {

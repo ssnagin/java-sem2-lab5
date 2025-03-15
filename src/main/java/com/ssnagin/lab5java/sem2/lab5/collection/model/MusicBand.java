@@ -4,7 +4,8 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.console.Console;
+import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
@@ -21,7 +22,7 @@ public class MusicBand extends Entity<MusicBand> {
     
     @NotNull 
     @PositiveNumber
-    private long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    protected long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
     @NotNull
     @NotEmpty
@@ -29,21 +30,14 @@ public class MusicBand extends Entity<MusicBand> {
             name="имя", 
             description="Название музыкальной группы"
     )
-    private String name; // Поле не может быть null, Строка не может быть пустой
+    protected String name; // Поле не может быть null, Строка не может быть пустой
     
     @NotNull
     @Description(
         name="координаты", 
         description="Какие-то координаты музыкальной группы"
     )
-    private Coordinates coordinates; // Поле не может быть null
-    
-    @NotNull
-    @Description(
-        name="дата создания", 
-        description="Название музыкальной группы"
-    )
-    private LocalDate creationDate; // Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    protected Coordinates coordinates; // Поле не может быть null
     
     @NotNull
     @PositiveNumber
@@ -51,27 +45,27 @@ public class MusicBand extends Entity<MusicBand> {
         name="количество участников", 
         description="количество участников данной группы"
     )
-    private Long numberOfParticipants; // Поле не может быть null, Значение поля должно быть больше 0
+    protected Long numberOfParticipants; // Поле не может быть null, Значение поля должно быть больше 0
     
     @PositiveNumber
     @Description(
         name="количество синглов", 
         description="сколько синглов выпустила данная группа"
     )
-    private Integer singlesCount; // Поле может быть null, Значение поля должно быть больше 0
+    protected Integer singlesCount; // Поле может быть null, Значение поля должно быть больше 0
     
     @Description(
         name="жанр музыки", 
         description="жанр музыки"
     )
-    private MusicGenre genre = null; // Поле может быть null
+    protected MusicGenre genre = null; // Поле может быть null
     
     @NotNull
     @Description(
         name="лучший альбом", 
         description="какой-то лучший альбом"
     )
-    private Album bestAlbum; // Поле не может быть null
+    protected Album bestAlbum; // Поле не может быть null
 
     /**
      * Constructor with specified id
@@ -85,11 +79,10 @@ public class MusicBand extends Entity<MusicBand> {
      * @param genre
      * @param bestAlbum 
      */
-    public MusicBand(long id, String name, Coordinates coordinates, LocalDate creationDate, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
+    public MusicBand(long id, String name, Coordinates coordinates, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
         this.setId(id);
         this.setName(name);
         this.setCoordinates(coordinates);
-        this.setCreationDate(creationDate);
         this.setNumberOfParticipants(numberOfParticipants);
         this.setSinglesCount(singlesCount);
         this.setGenre(genre);
@@ -107,19 +100,33 @@ public class MusicBand extends Entity<MusicBand> {
      * @param genre
      * @param bestAlbum 
      */
-    public MusicBand(String name, Coordinates coordinates, LocalDate creationDate, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
+    public MusicBand(String name, Coordinates coordinates, Long numberOfParticipants, Integer singlesCount, MusicGenre genre, Album bestAlbum) {
         
         this(
                 MusicBand.generateId(),
                 name,
                 coordinates,
-                creationDate,
                 numberOfParticipants,
                 singlesCount,
                 genre,
                 bestAlbum
         );
     }
+    
+    /**
+     * Constructor for prepared statements
+     */
+    public MusicBand() {
+        this(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+                );
+    }
+
    
     public long getId() {
         return id;
@@ -131,10 +138,6 @@ public class MusicBand extends Entity<MusicBand> {
 
     public Coordinates getCoordinates() {
         return coordinates;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
     }
 
     public Long getNumberOfParticipants() {
@@ -170,10 +173,6 @@ public class MusicBand extends Entity<MusicBand> {
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
-    
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
 
     public void setNumberOfParticipants(Long numberOfParticipants) {
         this.numberOfParticipants = numberOfParticipants;
@@ -197,7 +196,6 @@ public class MusicBand extends Entity<MusicBand> {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
                 ", numberOfParticipants=" + numberOfParticipants +
                 ", singlesCount=" + singlesCount +
                 ", genre=" + genre +
@@ -207,11 +205,12 @@ public class MusicBand extends Entity<MusicBand> {
     
     @Override
     public int compareTo(MusicBand otherMusicBand) {
-        int result = this.name.compareTo(otherMusicBand.name);
         
-        if (result == 0) this.creationDate.compareTo(otherMusicBand.getCreationDate());
+        int result = this.getName().compareTo(otherMusicBand.getName());
         
-        if (result == 0) this.coordinates.compareTo(otherMusicBand.getCoordinates());
+        if (result == 0) this.getSinglesCount().compareTo(otherMusicBand.getSinglesCount());
+        
+        if (result == 0) this.getCoordinates().compareTo(otherMusicBand.getCoordinates());
         
         return result;
     }
