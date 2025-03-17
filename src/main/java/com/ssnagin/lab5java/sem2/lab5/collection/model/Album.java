@@ -40,22 +40,6 @@ public class Album extends Entity<Album> {
         this(null, null);
     }
     
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//    
-//    public void setTracks(Long tracks) {
-//        this.tracks = tracks;
-//    }
-//    
-//    public String getName() {
-//        return this.name;
-//    }
-//    
-//    public Long getTracks() {
-//        return this.tracks;
-//    }
-    
     @Override
     public String toString() {
         return "Album={name='" + getName() + "', tracks='" + Long.toString(getTracks()) + "'}";

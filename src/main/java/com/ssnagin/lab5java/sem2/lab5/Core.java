@@ -47,18 +47,21 @@ public class Core {
     public Core() {
         // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
+        this.commandManager = CommandManager.getInstance();
+        registerCommands();
+        
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
         
-        this.commandManager = new CommandManager() {{
-           register(new CommandExit("exit", "exit this useless piece of masterpiece"));
-           register(new CommandHelp("help", "display help on available commands", this));
-           register(new CommandExecuteScript("execute_script", "some description here", this));
-           register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
-           register(new CommandShow("show", "show collection's elements", collectionManager));
-        }};
-        
         this.setApplicationStatus(ApplicationStatus.RUNNING);
+    }
+    
+    private void registerCommands() {
+        this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
+        this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
+        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager));
+        this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
+        this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
     }
 
     public void start() {

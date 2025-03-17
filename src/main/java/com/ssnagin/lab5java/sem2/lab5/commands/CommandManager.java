@@ -7,7 +7,6 @@ package com.ssnagin.lab5java.sem2.lab5.commands;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandDefault;
 import com.ssnagin.lab5java.sem2.lab5.commands.interfaces.Manageable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,14 @@ import lombok.ToString;
 @ToString
 public class CommandManager implements Manageable<Command> {
     
+    private static final CommandManager instance = new CommandManager();
+    
     private Map<String, Command> commands = new HashMap<>();
 
+    public static CommandManager getInstance() {
+        return instance;
+    }
+    
     @Override
     public void register(Command command) {
         commands.put(command.getName(), command);

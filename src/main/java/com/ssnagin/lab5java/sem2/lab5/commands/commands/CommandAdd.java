@@ -35,7 +35,7 @@ public class CommandAdd extends Command {
     
     public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
         this.scanner = scanner;
     }
@@ -206,5 +206,4 @@ public class CommandAdd extends Command {
                Number.class.isAssignableFrom(clazz) || 
                Boolean.class.isAssignableFrom(clazz);
     }
-
 }
