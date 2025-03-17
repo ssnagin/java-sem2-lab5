@@ -12,10 +12,10 @@ import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandAdd;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandShow;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
-import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
 import java.util.Scanner;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -55,6 +55,7 @@ public class Core {
            register(new CommandHelp("help", "display help on available commands", this));
            register(new CommandExecuteScript("execute_script", "some description here", this));
            register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
+           register(new CommandShow("show", "show collection's elements", collectionManager));
         }};
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);

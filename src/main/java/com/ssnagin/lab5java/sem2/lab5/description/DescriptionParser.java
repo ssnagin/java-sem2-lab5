@@ -6,6 +6,8 @@ package com.ssnagin.lab5java.sem2.lab5.description;
 
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -13,10 +15,26 @@ import java.util.Set;
  * @author developer
  */
 public class DescriptionParser {
-    public static String getRecursedDescription(Class<?> clazz, Set<Class<?>> classHistory) {
+    
+    public static String getRecursedDescription(Class<?> clazz, HashMap<Integer, Class<?>> classHistory) {
+        return getRecursedDescription(clazz, classHistory, 10);
+    }
+    
+    public static String getRecursedDescription(Class<?> clazz, HashMap<Integer, Class<?>> classHistory, int recursionLimit) {
         
-        if (classHistory.contains(clazz)) return "";
-        classHistory.add(clazz);        
+        if (recursionLimit <= 0) return "";
+        
+        for (Map.Entry<Integer, Class<?>> entry : classHistory.entrySet()) {
+            // If current clazz matches the previous in history, increase:
+            if (entry.getValue().equals(clazz)) {
+                classHistory.put(entry.getKey(), clazz);
+            }
+        }
+        
+        classHistory.put(classHistory.size(), clazz);
+            
+//        if (classHistory.contains(clazz)) return "";
+//        classHistory.add(clazz);        
         
         Field[] fields = clazz.getDeclaredFields();
         StringBuilder stringBuilder = new StringBuilder();
@@ -57,7 +75,7 @@ public class DescriptionParser {
             
             // Dangerous zone
             if (!isPrimitive(field.getType())) {
-                stringBuilder.append(getRecursedDescription(field.getType(), classHistory));
+                stringBuilder.append(getRecursedDescription(field.getType(), classHistory, recursionLimit - 1));
                 continue;
             }
             

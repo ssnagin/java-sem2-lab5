@@ -9,6 +9,8 @@ import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Shows brief description about available commands
@@ -30,9 +32,17 @@ public class CommandHelp extends Command {
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         Console.println(temporaryCreatedHeadMessage);
+       
+        ArrayList<String> sortedKeys = new ArrayList<String>(this.commandManager.getCommands().keySet());
+        Collections.sort(sortedKeys);
         
-        for (Command command : this.commandManager.getCommands()) {
-            Console.println(command.getName() + "   " + command.getDescription());
+        Command selectedCommand;
+        
+        for (String command : sortedKeys) {
+            
+            selectedCommand = this.commandManager.get(command);
+            
+            Console.println(selectedCommand.getName() + "   " + selectedCommand.getDescription());
         }
         
         return ApplicationStatus.RUNNING;

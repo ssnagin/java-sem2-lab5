@@ -4,24 +4,28 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
-import java.time.LocalDate;
 import java.util.UUID;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Class for describing Music Bands
  * @author DEVELOPER
  */
 @EqualsAndHashCode(callSuper=true)
+@Getter
+@Setter
 public class MusicBand extends Entity<MusicBand> {
     
     @NotNull 
     @PositiveNumber
+    @Setter(AccessLevel.NONE)
     protected long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
     @NotNull
@@ -73,7 +77,6 @@ public class MusicBand extends Entity<MusicBand> {
      * @param id
      * @param name
      * @param coordinates
-     * @param creationDate
      * @param numberOfParticipants
      * @param singlesCount
      * @param genre
@@ -94,7 +97,6 @@ public class MusicBand extends Entity<MusicBand> {
      * 
      * @param name
      * @param coordinates
-     * @param creationDate
      * @param numberOfParticipants
      * @param singlesCount
      * @param genre
@@ -128,34 +130,34 @@ public class MusicBand extends Entity<MusicBand> {
     }
 
    
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public Long getNumberOfParticipants() {
-        return numberOfParticipants;
-    }
-
-    public Integer getSinglesCount() {
-        return singlesCount;
-    }
-
-    public MusicGenre getGenre() {
-        return genre;
-    }
-
-    public Album getBestAlbum() {
-        return bestAlbum;
-    }
-    
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public Coordinates getCoordinates() {
+//        return coordinates;
+//    }
+//
+//    public Long getNumberOfParticipants() {
+//        return numberOfParticipants;
+//    }
+//
+//    public Integer getSinglesCount() {
+//        return singlesCount;
+//    }
+//
+//    public MusicGenre getGenre() {
+//        return genre;
+//    }
+//
+//    public Album getBestAlbum() {
+//        return bestAlbum;
+//    }
+//    
     private static long generateId() {
         long result = Math.abs(UUID.randomUUID().getLeastSignificantBits());
         if (result == 0) result = MusicBand.generateId();
@@ -165,30 +167,30 @@ public class MusicBand extends Entity<MusicBand> {
     private void setId(long id) {
         if (this.id <= -1) this.id = id;
     }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public void setNumberOfParticipants(Long numberOfParticipants) {
-        this.numberOfParticipants = numberOfParticipants;
-    }
-
-    public void setSinglesCount(Integer singlesCount) {
-        this.singlesCount = singlesCount;
-    }
-
-    public void setGenre(MusicGenre genre) {
-        this.genre = genre;
-    }
-
-    public void setBestAlbum(Album bestAlbum) {
-        this.bestAlbum = bestAlbum;
-    }
+//    
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public void setCoordinates(Coordinates coordinates) {
+//        this.coordinates = coordinates;
+//    }
+//
+//    public void setNumberOfParticipants(Long numberOfParticipants) {
+//        this.numberOfParticipants = numberOfParticipants;
+//    }
+//
+//    public void setSinglesCount(Integer singlesCount) {
+//        this.singlesCount = singlesCount;
+//    }
+//
+//    public void setGenre(MusicGenre genre) {
+//        this.genre = genre;
+//    }
+//
+//    public void setBestAlbum(Album bestAlbum) {
+//        this.bestAlbum = bestAlbum;
+//    }
 
     @Override
     public String toString() {

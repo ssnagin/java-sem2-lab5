@@ -195,7 +195,7 @@ public class CommandAdd extends Command {
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
         Console.println("Список того, что надо ввести:");
-        Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashSet<>()));
+        Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
         
         return ApplicationStatus.RUNNING;
     }

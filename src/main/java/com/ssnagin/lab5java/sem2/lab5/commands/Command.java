@@ -5,6 +5,7 @@
 package com.ssnagin.lab5java.sem2.lab5.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import lombok.EqualsAndHashCode;
@@ -16,12 +17,11 @@ import lombok.ToString;
  */
 @EqualsAndHashCode
 @ToString
-public abstract class Command {
+public abstract class Command implements Comparable<Command> {
     
     private String name;
     public String description;
 
-    
     public Command(String name, String description) {
         this.setName(name);
         this.setDescription(description);
@@ -51,4 +51,15 @@ public abstract class Command {
         
         return ApplicationStatus.RUNNING;
     }
+
+    public int compareTo(Command otherCommand) {
+        
+        int result = this.getName().compareTo(otherCommand.getName());
+        
+        if (result == 0) this.getDescription().compareTo(otherCommand.getDescription());
+        
+        return result;
+    }
+
+    
 }

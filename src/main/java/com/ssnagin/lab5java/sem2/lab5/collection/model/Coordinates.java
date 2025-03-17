@@ -7,12 +7,16 @@ package com.ssnagin.lab5java.sem2.lab5.collection.model;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author DEVELOPER
  */
 @EqualsAndHashCode(callSuper=true)
+@Getter
+@Setter
 public class Coordinates extends Entity<Coordinates> {
     @MaxValue(maxValue=180)
     @Description(
@@ -41,21 +45,21 @@ public class Coordinates extends Entity<Coordinates> {
         this(null, null);
     }
     
-    public void setY(Integer y) {
-        this.y = y;
-    }
-    
-    public void setX(Long x) {
-        this.x = x;
-    }
-    
-    public long getX() {
-        return this.x;
-    }
-    
-    public Integer getY() {
-        return this.y;
-    }
+//    public void setY(Integer y) {
+//        this.y = y;
+//    }
+//    
+//    public void setX(Long x) {
+//        this.x = x;
+//    }
+//    
+//    public long getX() {
+//        return this.x;
+//    }
+//    
+//    public Integer getY() {
+//        return this.y;
+//    }
     
     @Override
     public String toString() {

@@ -7,6 +7,7 @@ package com.ssnagin.lab5java.sem2.lab5.commands;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandDefault;
 import com.ssnagin.lab5java.sem2.lab5.commands.interfaces.Manageable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,15 @@ public class CommandManager implements Manageable<Command> {
         return (command != null) ? command : new CommandDefault("", "");
     }
     
-    public List<Command> getCommands() {  
-        return new ArrayList<Command>(this.commands.values());
+    public List<Command> getCommandsList() {  
+        return new ArrayList<>(this.commands.values());
+    }
+    
+    public Map<String, Command> getCommands() {
+        return this.commands;
+    }
+    
+    private void setCommands(Map<String, Command>  commands) {
+        this.commands = commands;
     }
 }

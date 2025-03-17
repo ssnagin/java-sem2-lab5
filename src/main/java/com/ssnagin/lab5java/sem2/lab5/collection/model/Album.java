@@ -7,12 +7,16 @@ package com.ssnagin.lab5java.sem2.lab5.collection.model;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author DEVELOPER
  */
 @EqualsAndHashCode(callSuper=true)
+@Getter
+@Setter
 public class Album extends Entity<Album> {
     @NotNull
     @Description(
@@ -36,21 +40,21 @@ public class Album extends Entity<Album> {
         this(null, null);
     }
     
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public void setTracks(Long tracks) {
-        this.tracks = tracks;
-    }
-    
-    public String getName() {
-        return this.name;
-    }
-    
-    public Long getTracks() {
-        return this.tracks;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//    
+//    public void setTracks(Long tracks) {
+//        this.tracks = tracks;
+//    }
+//    
+//    public String getName() {
+//        return this.name;
+//    }
+//    
+//    public Long getTracks() {
+//        return this.tracks;
+//    }
     
     @Override
     public String toString() {
