@@ -45,22 +45,6 @@ public class Coordinates extends Entity<Coordinates> {
         this(null, null);
     }
     
-//    public void setY(Integer y) {
-//        this.y = y;
-//    }
-//    
-//    public void setX(Long x) {
-//        this.x = x;
-//    }
-//    
-//    public long getX() {
-//        return this.x;
-//    }
-//    
-//    public Integer getY() {
-//        return this.y;
-//    }
-    
     @Override
     public String toString() {
         return "Coordinates="

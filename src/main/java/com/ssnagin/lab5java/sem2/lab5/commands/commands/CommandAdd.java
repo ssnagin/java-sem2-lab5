@@ -53,8 +53,6 @@ public class CommandAdd extends Command {
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
         
         try {
-            
-            
             var result = new LocalDateWrapper(
                     parseModel(MusicBand.class)
             );
@@ -68,21 +66,26 @@ public class CommandAdd extends Command {
             this.collectionManager.addElement(result);
             
             Console.separatePrint("Successfully added!", "SUCCESS");
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(CommandAdd.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Console.error(ex.toString());
         }
         
         return ApplicationStatus.RUNNING;
     }
     
+    
+    /**
+     * Parses the given model
+     * 
+     * @param <T>
+     * @param type
+     * @return
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException 
+     */
     private <T> T parseModel(Class<T> type) throws 
             NoSuchMethodException, 
             InstantiationException, 
