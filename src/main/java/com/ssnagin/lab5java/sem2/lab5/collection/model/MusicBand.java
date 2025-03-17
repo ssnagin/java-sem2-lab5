@@ -129,35 +129,6 @@ public class MusicBand extends Entity<MusicBand> {
                 );
     }
 
-   
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public Coordinates getCoordinates() {
-//        return coordinates;
-//    }
-//
-//    public Long getNumberOfParticipants() {
-//        return numberOfParticipants;
-//    }
-//
-//    public Integer getSinglesCount() {
-//        return singlesCount;
-//    }
-//
-//    public MusicGenre getGenre() {
-//        return genre;
-//    }
-//
-//    public Album getBestAlbum() {
-//        return bestAlbum;
-//    }
-//    
     private static long generateId() {
         long result = Math.abs(UUID.randomUUID().getLeastSignificantBits());
         if (result == 0) result = MusicBand.generateId();
@@ -167,30 +138,6 @@ public class MusicBand extends Entity<MusicBand> {
     private void setId(long id) {
         if (this.id <= -1) this.id = id;
     }
-//    
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public void setCoordinates(Coordinates coordinates) {
-//        this.coordinates = coordinates;
-//    }
-//
-//    public void setNumberOfParticipants(Long numberOfParticipants) {
-//        this.numberOfParticipants = numberOfParticipants;
-//    }
-//
-//    public void setSinglesCount(Integer singlesCount) {
-//        this.singlesCount = singlesCount;
-//    }
-//
-//    public void setGenre(MusicGenre genre) {
-//        this.genre = genre;
-//    }
-//
-//    public void setBestAlbum(Album bestAlbum) {
-//        this.bestAlbum = bestAlbum;
-//    }
 
     @Override
     public String toString() {

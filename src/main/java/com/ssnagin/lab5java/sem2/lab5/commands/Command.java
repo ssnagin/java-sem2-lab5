@@ -21,33 +21,71 @@ public abstract class Command implements Comparable<Command> {
     
     private String name;
     public String description;
-
+    
+    /**
+     * Parent constructor of a command
+     * 
+     * @param name
+     * @param description 
+     */
     public Command(String name, String description) {
         this.setName(name);
         this.setDescription(description);
     }
     
+     /**
+     * Set the name of a command
+     * 
+     * @return String
+     */
     public void setName(String name) {
         this.name = name;
     }
     
+     /**
+     * Set the description of a command
+     * 
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
     
+     /**
+     * Get the name of a command
+     * 
+     * @return String
+     */
     public String getName() {
         return this.name;
     }
     
+    /**
+     * Get the description of a command
+     * 
+     * @return String
+     */
     public String getDescription() {
         return this.description;
     }
     
+     /**
+     * Executes the given command and returns status code
+     * 
+     * @param parsedString
+     * @return ApplicationStatus
+     */
     public abstract ApplicationStatus executeCommand(ParsedString parsedString);
     
+     /**
+     * basic usage of a command
+     * 
+     * @param parsedString
+     * @return ApplicationStatus
+     */
     public ApplicationStatus showUsage(ParsedString parsedString) {
         
-        Console.log("Usage not implemented: " + parsedString.toString());
+        Console.log("Usage is still not implemented: " + parsedString.toString());
         
         return ApplicationStatus.RUNNING;
     }
