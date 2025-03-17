@@ -6,15 +6,10 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
-import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
-import java.time.LocalDate;
 
 /**
  * Shows brief description about available commands
@@ -37,7 +32,7 @@ public class CommandShow extends Command {
         if (this.collectionManager.isEmpty()) {
             Console.log("Collection is empty!");
             return ApplicationStatus.RUNNING;
-        }
+        } 
         
         for (MusicBand musicBand : this.collectionManager.getCollection()) {
             Console.println("========\n" + musicBand.getDescription());

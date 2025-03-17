@@ -9,7 +9,6 @@ import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationController;
-import java.time.LocalDate;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

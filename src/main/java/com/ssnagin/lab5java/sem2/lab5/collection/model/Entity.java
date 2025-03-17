@@ -6,14 +6,9 @@ package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.interfaces.Describable;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
-import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -23,24 +18,31 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public abstract class Entity<T> implements Describable, Comparable<T> {
     
+    @Override
     public abstract int compareTo(T object);
     
+    /**
+     * Shows description according to provided info in @Description
+     * @return String
+     */
+    @Override
     public String getDescription() {
         return getDescription(1);
     }
     
     /**
      * Shows description according to provided info in @Description
-     * @return 
+     * 
+     * @param depth
+     * @return String
      */
     public String getDescription(int depth) {
         
         Field[] fields = this.getClass().getDeclaredFields();
-        Method[] methods = this.getClass().getMethods();
         
         StringBuilder stringBuilder = new StringBuilder();
         
-        stringBuilder.append(getIndent(depth)).append(getIndent(depth)).append("Объекты ").append(
+        stringBuilder.append("Entity of ").append(
                 this.getClass().getSimpleName()).append(":\n");
         
         for (Field field : fields) {

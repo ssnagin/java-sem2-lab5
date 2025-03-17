@@ -27,7 +27,6 @@ public class CollectionManager {
     
     public void addElement(MusicBand element) {
         this.collection.add(element);
-        Console.separatePrint(element, "CM");
     }
     
     public MusicBand getElementById(long otherId) {

@@ -49,10 +49,11 @@ public class Core {
         // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
-        registerCommands();
         
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
+        
+        registerCommands();
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }

@@ -16,12 +16,9 @@ import com.ssnagin.lab5java.sem2.lab5.description.DescriptionParser;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Shows brief description about available commands
@@ -48,17 +45,12 @@ public class CommandAdd extends Command {
                 return this.showUsage(parsedString);
         }
         
-        StringBuilder test = new StringBuilder();
-        
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
         
         try {
             var result = new LocalDateWrapper(
                     parseModel(MusicBand.class)
             );
-                    
-            Console.log(result.toString());
-            Console.log(result.getName());
             
             // Final validation here;
             
@@ -106,7 +98,7 @@ public class CommandAdd extends Command {
             Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType().toString());
             
             Object value = parseField(field.getType());
-            setFieldValue(instance, field.getName(), value);
+            setFieldValue(instance, value);
         }
         
         return instance;
@@ -127,6 +119,8 @@ public class CommandAdd extends Command {
     }
     
     private Object parsePrimitiveInput(Class<?> type) {
+        
+        Console.print("       | ");
         
         String input = scanner.nextLine().trim();
         
@@ -165,22 +159,21 @@ public class CommandAdd extends Command {
             Console.println("- " + object);
         }
         
+        Console.print("       | ");
+        
         String input = scanner.nextLine().trim();
         return Enum.valueOf((Class<? extends Enum>) type, input);
     }
     
-    private void setFieldValue(Object instance, String fieldName, Object value) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String preparedSetter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1).toLowerCase();
-        
+    private void setFieldValue(Object instance, Object value) 
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+
         Class<?> setterClazz = instance.getClass();
         
-        // exception here
         java.lang.reflect.Method setter = findSetterByParameterName(setterClazz, value.getClass());
         
-        // exception here
-//        java.lang.reflect.Method setter = setterClazz.getMethod(preparedSetter, value.getClass());
         
-        // exception here too 
+        // exception here 
         setter.invoke(instance, value);
     }
     
