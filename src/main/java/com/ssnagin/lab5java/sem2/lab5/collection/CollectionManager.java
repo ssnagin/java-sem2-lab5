@@ -70,6 +70,10 @@ public class CollectionManager {
         return this.collection.size();
     }
     
+    public boolean isEmpty() {
+        return this.collection.isEmpty();
+    }
+    
     public TreeSet<MusicBand> getCollection() {
         return this.collection;
     }
