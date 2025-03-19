@@ -17,8 +17,6 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
  */
 public class CommandDefault extends Command {
     
-    private CommandManager commandManager;
-    
     private String temporaryCreatedHeadMessage = "I apologize, but the given command DoEs NoT eXiSt!\n"
             + "(or it was given incorecctly)\n\n"
             + "Please, make another try :) or type help to see available commands";

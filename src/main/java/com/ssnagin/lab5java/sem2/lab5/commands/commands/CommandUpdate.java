@@ -4,32 +4,32 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
-import com.ssnagin.lab5java.sem2.lab5.reflections.Reflections;
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.description.DescriptionParser;
-import java.lang.reflect.InvocationTargetException;
+import com.ssnagin.lab5java.sem2.lab5.reflections.Reflections;
 import java.util.HashMap;
 import java.util.Scanner;
 
 /**
- * Shows brief description about available commands
- * 
+ *
  * @author developer
  */
-public class CommandAdd extends Command {
-    
-    public CollectionManager collectionManager;
-    private final Scanner scanner;
-    
-    public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner) {
-        super(name, description);
+public class CommandUpdate extends Command {
 
+    CollectionManager collectionManager;
+    Scanner scanner;
+    
+    public CommandUpdate(String name, 
+            String description, 
+            CollectionManager collectionManager,
+            Scanner scanner) {
+        super(name, description);
+        
         this.collectionManager = collectionManager;
         this.scanner = scanner;
     }
@@ -42,30 +42,43 @@ public class CommandAdd extends Command {
                 return this.showUsage(parsedString);
         }
         
-        Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
+        Long id;
         
+        // Try to parse Integer
+        // VALIDATOR HERE
         try {
-            var result = new LocalDateWrapper(
-                    Reflections.parseModel(MusicBand.class, scanner)
-            );
-            
-            // Final validation here;
-            
-            // Adding into CollectionManager with Creation Date:
-            this.collectionManager.addElement(result);
-            
-            Console.separatePrint("Successfully added!", "SUCCESS");
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Console.error(ex.toString());
+            id = Long.parseLong(parsedString.getArguments().get(0));
+        } catch (NumberFormatException ex) {
+            Console.log("Неверный формат числа");
+            return ApplicationStatus.RUNNING;
+        } catch (IndexOutOfBoundsException ex) {
+            return this.showUsage(parsedString);
         }
+        
+        MusicBand musicBand = this.collectionManager.getElementById(id);
+        
+        if (musicBand == null) {
+            Console.log("Коллекции по заданому id не существует");
+            return ApplicationStatus.RUNNING;
+        }
+        
+        /*
+        1. Get MusicBand model
+        2. 
+        */
         
         return ApplicationStatus.RUNNING;
     }
     
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
-        Console.println("Список того, что надо ввести:");
-        Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
+        
+        StringBuilder stringBuilder = new StringBuilder();
+      
+        stringBuilder.append("usage: update <id> ...\n").append("things that can be updated:\n");
+        stringBuilder.append(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
+        
+        Console.println(stringBuilder);
         
         return ApplicationStatus.RUNNING;
     }

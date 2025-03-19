@@ -33,3 +33,9 @@ application {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "com.ssnagin.lab5java.sem2.lab5.App"
+    }
+}

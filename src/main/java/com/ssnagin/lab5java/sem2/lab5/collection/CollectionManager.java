@@ -5,8 +5,7 @@
 package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.console.Console;
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -63,6 +62,25 @@ public class CollectionManager {
     
     public MusicBand getFirstElement() {
         return this.collection.first();
+    }
+    
+    public MusicBand getElementById(Long id) {
+
+        for (MusicBand element : this.collection) {
+            if (element.getId() == id) return element;
+        }
+        return null;
+    }
+    
+    public boolean removeElementById(Long id) {
+        
+        MusicBand toRemove = getElementById(id);
+        
+        if (toRemove == null) return false;
+        
+        this.collection.remove(toRemove);
+        
+        return true;
     }
     
     public int getSize() {

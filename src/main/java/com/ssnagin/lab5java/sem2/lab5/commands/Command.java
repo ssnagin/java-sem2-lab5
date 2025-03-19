@@ -97,6 +97,4 @@ public abstract class Command implements Comparable<Command> {
         
         return result;
     }
-
-    
 }

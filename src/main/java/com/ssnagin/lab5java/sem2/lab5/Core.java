@@ -14,6 +14,7 @@ import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandShow;
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandUpdate;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
@@ -65,6 +66,7 @@ public class Core {
         this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
         this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements"));
+        this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, scanner));
     }
 
     public void start() {
