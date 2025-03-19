@@ -23,11 +23,8 @@ import lombok.ToString;
 public class LocalDateWrapper extends MusicBand  {
     protected LocalDate localDate;
     
-    protected MusicBand base; // DEPRECATED
-    
     public LocalDateWrapper(MusicBand base) {
         this(base, LocalDate.now());
-        this.base = base;
     }
     
     public LocalDateWrapper(MusicBand base, LocalDate localDate) {
@@ -40,18 +37,7 @@ public class LocalDateWrapper extends MusicBand  {
                 base.getGenre(),
                 base.getBestAlbum()
         );
-        this.setBase(base);
         
         setLocalDate(localDate);
-    }
-    
-    @Deprecated
-    public int compareTo(LocalDateWrapper other) {
-                
-        if (other instanceof LocalDateWrapper) {
-            LocalDateWrapper otherWrapper = (LocalDateWrapper) other;
-            return this.base.compareTo(otherWrapper.base);
-        }
-        return this.base.compareTo(other);
     }
 }

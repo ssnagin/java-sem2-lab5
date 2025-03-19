@@ -9,6 +9,8 @@ import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -38,7 +40,7 @@ public abstract class Entity<T> implements Describable, Comparable<T> {
      */
     public String getDescription(int depth) {
         
-        Field[] fields = this.getClass().getDeclaredFields();
+        List<Field> fields = getAllFields(this.getClass());
         
         StringBuilder stringBuilder = new StringBuilder();
         
@@ -84,6 +86,19 @@ public abstract class Entity<T> implements Describable, Comparable<T> {
         }
         
         return stringBuilder.toString();
+    }
+    
+    public static List<Field> getAllFields(Class<?> clazz) {
+        List<Field> fields = new ArrayList<>();
+
+        while (clazz != null) {
+            for (Field field : clazz.getDeclaredFields()) {
+                fields.add(field);
+            }
+            clazz = clazz.getSuperclass();
+        }
+        
+        return fields;
     }
     
     private static String getIndent(int indent) {
