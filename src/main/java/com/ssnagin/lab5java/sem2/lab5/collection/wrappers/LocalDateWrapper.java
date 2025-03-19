@@ -23,7 +23,7 @@ import lombok.ToString;
 public class LocalDateWrapper extends MusicBand  {
     protected LocalDate localDate;
     
-    
+    protected MusicBand base; // DEPRECATED
     
     public LocalDateWrapper(MusicBand base) {
         this(base, LocalDate.now());
@@ -40,6 +40,7 @@ public class LocalDateWrapper extends MusicBand  {
                 base.getGenre(),
                 base.getBestAlbum()
         );
+        this.setBase(base);
         
         setLocalDate(localDate);
     }
