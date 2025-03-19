@@ -18,7 +18,7 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
  */
 public class CommandShow extends Command {
     
-    CollectionManager collectionManager;
+    private CollectionManager collectionManager;
     
     public CommandShow(String name, String description, CollectionManager collectionManager) {
         super(name, description);

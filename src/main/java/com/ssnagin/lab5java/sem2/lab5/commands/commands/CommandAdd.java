@@ -24,7 +24,7 @@ import java.util.Scanner;
  */
 public class CommandAdd extends Command {
     
-    public CollectionManager collectionManager;
+    private CollectionManager collectionManager;
     private final Scanner scanner;
     
     public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner) {
@@ -64,7 +64,7 @@ public class CommandAdd extends Command {
     
     @Override
     public ApplicationStatus showUsage(ParsedString parsedString) {
-        Console.println("Список того, что надо ввести:");
+        Console.println("Usage: add\nСписок того, что надо ввести:");
         Console.println(DescriptionParser.getRecursedDescription(MusicBand.class, new HashMap<>()));
         
         return ApplicationStatus.RUNNING;

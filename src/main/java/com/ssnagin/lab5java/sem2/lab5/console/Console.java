@@ -33,6 +33,10 @@ public class Console {
         Console.separatePrint(text, " ERROR ");
     }
     
+    public static void error(Exception exception) {
+        Console.separatePrint(exception.getMessage(), " ERROR ");
+    }
+    
     public static void separatePrint(Object text, String leftSide) {
 
         if (leftSide.length() > 7) {

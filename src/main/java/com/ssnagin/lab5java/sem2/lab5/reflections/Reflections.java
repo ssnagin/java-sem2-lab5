@@ -26,6 +26,7 @@ public final class Reflections {
      * 
      * @param <T>
      * @param type
+     * @param scanner
      * @return
      * @throws NoSuchMethodException
      * @throws InstantiationException
@@ -83,6 +84,37 @@ public final class Reflections {
         if (type.isEnum()) return Reflections.parseEnumInput(type, scanner);
         
         return Reflections.parseModel(type, scanner);
+    }
+    
+        /**
+     * Parse field of a collection
+     * 
+     * @param type
+     * @param input
+     * @return
+     * @throws NoSuchMethodException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException 
+     */
+    public static Object parseField(Class<?> type, String input) throws 
+            NoSuchMethodException, 
+            InstantiationException, 
+            IllegalAccessException, 
+            IllegalArgumentException, 
+            InvocationTargetException {
+        
+        // So okay, if Class type belongs to primitives, it tries to parse 
+        // the same primitive. If it is enum, the same story. 
+        // But what if another Class??? I think nothing for now.
+        
+        if (Reflections.isPrimitive(type)) return Reflections.parsePrimitiveInput(type, input);
+        
+        if (type.isEnum()) return Reflections.parseEnumInput(type, input);
+        
+        // КОСТЫЛЬ!!!!
+        return null;
     }
     
     /**
@@ -143,6 +175,18 @@ public final class Reflections {
         
         String input = scanner.nextLine().trim();
         
+        return parsePrimitiveInput(type, input);
+    }
+    
+        /**
+     * Parses string and returns object with type according to the parsedData
+     * 
+     * @param type
+     * @param input
+     * @return 
+     */
+    public static Object parsePrimitiveInput(Class<?> type, String input) {
+        
         // VALIDATION HERE | NoT yEt ImPlEmEnTeD!!!!!
         // ex. validatePrimitiveInput()
         
@@ -169,7 +213,7 @@ public final class Reflections {
     }
     
     /**
-     * Tries to parse enum type
+     * Tries to parse enum type with custom user's input
      * 
      * @param type
      * @param scanner
@@ -188,6 +232,17 @@ public final class Reflections {
         Console.print("       | ");
         
         String input = scanner.nextLine().trim();
+        return parseEnumInput(type, input);
+    }
+    
+    /**
+     * Tries to parse enum type
+     * 
+     * @param type
+     * @param input
+     * @return 
+     */
+    public static Object parseEnumInput(Class<?> type, String input) {
         return Enum.valueOf((Class<? extends Enum>) type, input);
     }
 }
