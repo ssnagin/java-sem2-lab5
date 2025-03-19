@@ -29,6 +29,10 @@ public class ParsedString {
         this.addArguments(arguments);
     }
     
+    public ParsedString() {
+        this("");
+    }
+    
     public ParsedString(String pureString) {
         this.setPureString(pureString); 
         
@@ -63,6 +67,9 @@ public class ParsedString {
     }
     
     public void addArgument(String argument) {
+        if (this.getArguments().isEmpty())
+            argument = argument.stripLeading();
+        
         this.arguments.add(argument);
     }
     

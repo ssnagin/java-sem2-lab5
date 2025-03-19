@@ -26,7 +26,7 @@ public class MusicBand extends Entity<MusicBand> {
     @NotNull 
     @PositiveNumber
     @Setter(AccessLevel.NONE)
-    protected long id = -1; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    protected Long id; // Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     
     @NotNull
     @NotEmpty
@@ -135,8 +135,8 @@ public class MusicBand extends Entity<MusicBand> {
         return result;
     }
     
-    private void setId(long id) {
-        if (this.id <= -1) this.id = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
