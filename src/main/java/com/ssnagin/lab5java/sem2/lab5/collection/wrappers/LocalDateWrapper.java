@@ -12,7 +12,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Needs to make CreationDate if needed
+ * Wrapper for localDate
  * @author developer
  */
 

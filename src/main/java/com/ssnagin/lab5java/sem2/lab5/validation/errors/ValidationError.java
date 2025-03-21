@@ -4,10 +4,17 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.validation.errors;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  *
  * @author developer
  */
+@Getter
+@Setter
+@ToString
 public class ValidationError {
     
     private String fieldName;
@@ -21,18 +28,7 @@ public class ValidationError {
         this.setMessage(message);
     }
     
-    public String getMessage() {
-        return this.message;
-    }
-    
-    public void setMessage(Object message) {
-        this.message = (String) message;
-    }
-    
-    @Override
-    public String toString() {
-        return "ValidationError={fieldName=" + 
-                this.fieldName + 
-                ", message="+this.message+"}";
+    public boolean isEmpty() {
+        return fieldName == null && message == null;
     }
 }

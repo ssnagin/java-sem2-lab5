@@ -91,7 +91,6 @@ public class Core {
             
             // I need to replace this code for the future custom input (executeCommand from script) integration.
             
-
             parsedString = new ParsedString(scanner.nextLine());
             
             parsedString = InputParser.parse(parsedString.getPureString(), ParseMode.COMMAND_ONLY);

@@ -17,10 +17,6 @@ public class Console {
     
     private static final String SHELL_ARROW = " @ _ @ > ";
     
-    public Console() {
-        
-    }
-    
     public static String getShellArrow() {
         return SHELL_ARROW;
     }

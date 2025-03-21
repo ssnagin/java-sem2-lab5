@@ -45,8 +45,13 @@ public class CommandAdd extends Command {
         Console.separatePrint("Please, fill in the form with your values:", this.getName().toUpperCase());
         
         try {
+            
+            MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
+            
+            if (musicBand == null) return ApplicationStatus.RUNNING;
+            
             var result = new LocalDateWrapper(
-                    Reflections.parseModel(MusicBand.class, scanner)
+                    musicBand
             );
             
             // Final validation here;

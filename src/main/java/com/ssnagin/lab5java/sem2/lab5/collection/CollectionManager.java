@@ -5,7 +5,6 @@
 package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**

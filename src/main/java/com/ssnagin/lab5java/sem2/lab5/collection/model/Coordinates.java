@@ -23,14 +23,14 @@ public class Coordinates extends Entity<Coordinates> {
         name="координата х", 
         description="какое-то описание"
     )
-    private Long x = null; //Максимальное значение поля: 180. (Так как long может быть null, ставим Long вместо long)
+    protected Long x = null; //Максимальное значение поля: 180. (Так как long может быть null, ставим Long вместо long)
     
     @MaxValue(maxValue=750)
     @Description(
         name="координата y", 
         description="какое-то описание"
     )
-    private Integer y; //Максимальное значение поля: 750, Поле не может быть null
+    protected Integer y; //Максимальное значение поля: 750, Поле не может быть null
 
     public Coordinates(Long x, Integer y) {
         setX(x);

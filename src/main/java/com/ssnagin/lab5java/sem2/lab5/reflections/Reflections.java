@@ -2,6 +2,9 @@ package com.ssnagin.lab5java.sem2.lab5.reflections;
 
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.validation.classes.MaxValueValidator;
+import com.ssnagin.lab5java.sem2.lab5.validation.errors.ValidationError;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -54,6 +57,18 @@ public final class Reflections {
             Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType().toString());
             
             Object value = Reflections.parseField(field.getType(), scanner);
+            
+            ValidationError errors;
+
+            MaxValueValidator validator = new MaxValueValidator();
+            
+            errors = validator.validate(field, value);// ТУТ
+            
+            if (errors != null) {
+                Console.log(errors.toString());
+                return null;
+            }
+            
             Reflections.setFieldValue(instance, value);
         }
         
@@ -244,5 +259,10 @@ public final class Reflections {
      */
     public static Object parseEnumInput(Class<?> type, String input) {
         return Enum.valueOf((Class<? extends Enum>) type, input);
+    }
+    
+    public static <T extends Annotation> T getAnnotation(Class<T> annotation, Field field) {
+        if (!field.isAnnotationPresent(annotation)) return null;
+        return field.getAnnotation(annotation);
     }
 }
