@@ -18,14 +18,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Coordinates extends Entity<Coordinates> {
-    @MaxValue(maxValue=180)
+    @MaxValue(value=180)
     @Description(
         name="координата х", 
         description="какое-то описание"
     )
     protected Long x = null; //Максимальное значение поля: 180. (Так как long может быть null, ставим Long вместо long)
     
-    @MaxValue(maxValue=750)
+    @MaxValue(value=750)
     @Description(
         name="координата y", 
         description="какое-то описание"

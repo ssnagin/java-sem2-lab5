@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MinValue {
-    int minValue();
+    int value();
     String showMessage() default "value must be above {value}";
 }

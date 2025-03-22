@@ -13,8 +13,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.36")
 
     implementation("com.google.code.gson:gson:2.12.1")
-
-    implementation("commons-cli:commons-cli:1.9.0")
+    implementation("org.apache.commons:commons-lang3:3.17.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

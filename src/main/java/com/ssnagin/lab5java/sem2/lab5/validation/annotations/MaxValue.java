@@ -17,6 +17,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface MaxValue {
-     long maxValue();
-     String showMessage() default "value must be below {0}";
+     long value();
+     String message() default "value must be below {0}";
 }

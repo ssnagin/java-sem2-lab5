@@ -2,8 +2,7 @@ package com.ssnagin.lab5java.sem2.lab5.reflections;
 
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
-import com.ssnagin.lab5java.sem2.lab5.validation.classes.MaxValueValidator;
-import com.ssnagin.lab5java.sem2.lab5.validation.errors.ValidationError;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -58,16 +57,16 @@ public final class Reflections {
             
             Object value = Reflections.parseField(field.getType(), scanner);
             
-            ValidationError errors;
+//            ValidationError errors;
 
-            MaxValueValidator validator = new MaxValueValidator();
+//            MaxValueValidator validator = new MaxValueValidator();
             
-            errors = validator.validate(field, value);// ТУТ
-            
-            if (errors != null) {
-                Console.log(errors.toString());
-                return null;
-            }
+//            errors = validator.validate(field, value);// ТУТ
+//
+//            if (errors != null) {
+//                Console.log(errors.toString());
+//                return null;
+//            }
             
             Reflections.setFieldValue(instance, value);
         }
