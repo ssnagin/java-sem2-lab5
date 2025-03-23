@@ -57,7 +57,7 @@ public class App {
         */
         
         CollectionManager collectionManager = new CollectionManager();
-        Validate validationController = new Validate();
+        //Validate validationController = new Validate();
         
         collectionManager.addElement(new MusicBand(
             "test", 

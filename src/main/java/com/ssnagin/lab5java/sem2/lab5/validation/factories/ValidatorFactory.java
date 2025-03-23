@@ -5,6 +5,7 @@ import com.ssnagin.lab5java.sem2.lab5.validation.validators.Validator;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
-public class ValidatorsFactory {
-    Map<Annotation, Validator<?>> validators
+public interface ValidatorFactory<T> {
+    boolean isCompatibleWith(Class<? extends Annotation> annotationClass);
+    <A extends Annotation> Validator<T> create(A annotation);
 }

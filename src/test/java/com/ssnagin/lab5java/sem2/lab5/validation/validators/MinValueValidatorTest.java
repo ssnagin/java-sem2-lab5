@@ -9,5 +9,6 @@ public class MinValueValidatorTest {
     public void testValidate() {
         MinValueValidator<Integer> validator = new MinValueValidator<>(0);
         assertDoesNotThrow(() -> validator.validate(100));
+        assertThrows(IllegalArgumentException.class, () -> validator.validate(-100));
     }
 }

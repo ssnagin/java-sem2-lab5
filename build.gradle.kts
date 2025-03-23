@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-
+    compileOnly("com.github.peichhorn:lombok-pg:0.11.3")
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
 
@@ -17,6 +17,9 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testCompileOnly("com.github.peichhorn:lombok-pg:0.11.3")
+    testCompileOnly("org.projectlombok:lombok:1.18.36")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
 } 
 
 java {

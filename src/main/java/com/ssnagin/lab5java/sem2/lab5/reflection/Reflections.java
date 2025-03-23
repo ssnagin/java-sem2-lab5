@@ -1,4 +1,4 @@
-package com.ssnagin.lab5java.sem2.lab5.reflections;
+package com.ssnagin.lab5java.sem2.lab5.reflection;
 
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;

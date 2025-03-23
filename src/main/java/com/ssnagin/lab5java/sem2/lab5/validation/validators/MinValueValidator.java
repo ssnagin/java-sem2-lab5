@@ -5,6 +5,7 @@
 package com.ssnagin.lab5java.sem2.lab5.validation.validators;
 
 import lombok.AllArgsConstructor;
+import static org.apache.commons.lang3.compare.ComparableUtils.is;
 
 /**
  *
@@ -17,7 +18,7 @@ public class MinValueValidator<T extends Comparable<T>> implements Validator<T> 
     
     @Override
     public void validate(T value) {
-        if(value.compareTo(this.minimumValue) < 0)
+        if(is(value).lessThan(minimumValue))
             throw new IllegalArgumentException(String.format(MIN_VALUE_ERROR, value, this.minimumValue));
     }
 }

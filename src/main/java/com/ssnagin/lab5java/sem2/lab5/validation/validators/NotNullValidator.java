@@ -8,6 +8,6 @@ public class NotNullValidator implements Validator<Object> {
     @Override
     public void validate(Object value) {
         if(Objects.isNull(value))
-            throw new IllegalArgumentException(String.format(NULL_VALUE_ERROR));
+            throw new IllegalArgumentException(NULL_VALUE_ERROR);
     }
 }

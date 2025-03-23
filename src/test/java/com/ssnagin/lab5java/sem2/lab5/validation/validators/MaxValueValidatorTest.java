@@ -8,5 +8,6 @@ public class MaxValueValidatorTest {
     public void testValidate() {
         MaxValueValidator<Integer> validator = new MaxValueValidator<>(100);
         assertDoesNotThrow(() -> validator.validate(50));
+        assertThrows(IllegalArgumentException.class, () -> validator.validate(150));
     }  
 }
