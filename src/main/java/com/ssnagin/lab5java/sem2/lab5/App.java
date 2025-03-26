@@ -21,11 +21,7 @@ import java.util.Arrays;
 @ToString
 public class App {
     public static void main(String[] args) {
-
-        System.out.println(Arrays.toString(args));
-
-        Core core = new Core();
-        core.start(args);
+        Core.getInstance().start(args);
     }
     
     public static void run() {

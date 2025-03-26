@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
+import com.ssnagin.lab5java.sem2.lab5.Core;
 import com.ssnagin.lab5java.sem2.lab5.reflection.Reflections;
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
@@ -28,8 +29,8 @@ import java.util.Scanner;
  */
 public class CommandAdd extends Command {
     
-    private final CollectionManager collectionManager;
-    private final Scanner scanner;
+    private CollectionManager collectionManager;
+    private Scanner scanner;
     
     public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner) {
         super(name, description);
@@ -40,7 +41,8 @@ public class CommandAdd extends Command {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
+        this.scanner = Core.getInstance().getCurrentScanner();
+
         if (!parsedString.getArguments().isEmpty()) {
             if (" h".equals(parsedString.getArguments().get(0))) 
                 return this.showUsage(parsedString);

@@ -6,6 +6,7 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.google.gson.GsonBuilder;
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
+import com.ssnagin.lab5java.sem2.lab5.Core;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
@@ -17,6 +18,8 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
 import com.ssnagin.lab5java.sem2.lab5.files.adapters.LocalDateAdapter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.TreeSet;
@@ -44,24 +47,34 @@ public class CommandExecuteScript extends Command {
         
         parsedString = InputParser.parse(parsedString.getRowArguments(), ParseMode.COMMAND_ONLY);
 
+        Console.println(parsedString);
 
-        /*
-        TreeSet<MusicBand> test = null;
+
         try {
-            test = FileManager.getInstance().read("ttt.json");
-            this.collectionManager.setCollection(test);
+            ((Core) Core.getInstance()).pushFileScanner(new File(parsedString.getCommand()));
+
+            while (((Core) Core.getInstance()).getCurrentScanner().hasNextLine()) {
+                String line = ((Core) Core.getInstance()).getCurrentScanner().nextLine().trim();
+                if (line.isEmpty()) continue;
+
+                ParsedString scriptCommand = InputParser.parse(line, ParseMode.COMMAND_ONLY);
+                Command command = commandManager.get(scriptCommand.getCommand());
+
+                if (command != null) {
+                    command.executeCommand(scriptCommand);
+                } else {
+                    Console.error("Unknown command in script: " + scriptCommand.getCommand());
+                }
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Console.error("Script file not found: " + e.getMessage());
+        } catch (Exception e) {
+            Console.error("Recursion detected!");
+        } finally {
+            // Возвращаем ввод к предыдущему источнику (клавиатура или родительский скрипт)
+            ((Core) Core.getInstance()).popScanner();
         }
 
-        Console.println(test);
-
         return ApplicationStatus.RUNNING;
-
-        */
-        // temporary solution without reading files
-        //Console.log(parsedString);
-        //Command command = this.commandManager.get(parsedString.getCommand());
-        //return command.executeCommand(parsedString);
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.*;
 import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
@@ -12,14 +13,18 @@ import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
-import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationManager;
-import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import com.ssnagin.lab5java.sem2.lab5.validation.factories.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -29,16 +34,23 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public class Core {
+
+    @Getter
+    private static Core instance = new Core();
     
     private CollectionManager collectionManager;
     private ValidationManager validationManager;
     private CommandManager commandManager;
+    private Set<String> activeScripts;
     private InputParser inputParser;
     private Console console;
 
     private FileManager fileManager;
 
     private Scanner scanner;
+
+    private Stack<Scanner> inputScanners;
+    private Scanner defaultScanner;
     
     @Getter
     ApplicationStatus applicationStatus;
@@ -52,21 +64,31 @@ public class Core {
                                             "  ver. 1.0 | github.com/ssnagin/java-sem2-lab5.git                ▐▙▄▞▘        \n\n";
     
     public Core() {
+
+
+        this.defaultScanner = new Scanner(System.in);
+        inputScanners = new Stack<>();
+        this.inputScanners.push(defaultScanner);
+
         // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
 
         // TEMPORARY SOLUTION
         this.validationManager = ValidationManager.getInstance();
-        
+
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
 
         this.fileManager = FileManager.getInstance();
-        
+
+
+        activeScripts = new HashSet<>();
+
         registerCommands();
         registerValidators();
-        
+
+
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
     
@@ -88,6 +110,27 @@ public class Core {
         this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
     }
 
+    public Scanner getCurrentScanner() {
+        return inputScanners.peek();
+    }
+
+    public void pushFileScanner(File file) throws Exception {
+        String canonicalPath = file.getCanonicalPath();
+        if (activeScripts.contains(canonicalPath)) {
+            throw new Exception("Recursion: " + canonicalPath);
+        }
+        activeScripts.add(canonicalPath);
+        inputScanners.push(new Scanner(file));
+    }
+
+    public void popScanner() {
+        if (inputScanners.size() > 1) {
+            Scanner oldScanner = inputScanners.pop();
+            activeScripts.remove(oldScanner.toString());
+            oldScanner.close();
+        }
+    }
+
     private void registerValidators() {
         this.validationManager.register(new MaxValueValidatorFactory<>());
         this.validationManager.register(new MinValueValidatorFactory<>());
@@ -102,29 +145,43 @@ public class Core {
         
         // Step-by-step description of the algorithm.
 
-        // 0. Load file if given here:
-
-        /// ///
-
-        // 1. First, print logo
+        // 0. First, print logo
 
         this.printLogo();
-        
+
+        // 1. Load file if given here:
+
+        if (args.length > 0) {
+            String path = String.join("", args);
+
+            try {
+                TreeSet<MusicBand> elements = fileManager.readCollection(path);
+                this.collectionManager.setCollection(elements);
+            } catch (Exception e) {
+                Console.error(e);
+                Console.log("Skip adding into collection");
+            }
+        }
+
+
+
         // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser
-        
+
         Scanner scanner = new Scanner(System.in);
         ParsedString parsedString;
-        
+
         while (true) {
-            
+
             Console.print(Console.getShellArrow());
-            
+
             // I need to replace this code for the future custom input (executeCommand from script) integration.
-            
-            parsedString = new ParsedString(scanner.nextLine());
-            
-            parsedString = InputParser.parse(parsedString.getPureString(), ParseMode.COMMAND_ONLY);
+
+            String inputLine = getCurrentScanner().hasNextLine()
+                    ? getCurrentScanner().nextLine()
+                    : "";
+
+            parsedString = InputParser.parse(inputLine, ParseMode.COMMAND_ONLY);
 
             // 2.1 If the string is null, skip the code:
 

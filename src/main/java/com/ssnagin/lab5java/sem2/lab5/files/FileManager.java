@@ -8,19 +8,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
+import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
+import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.files.adapters.LocalDateAdapter;
-import com.sun.source.tree.Tree;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.SneakyThrows;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -57,21 +54,35 @@ public class FileManager {
         }
     }
 
-    public TreeSet<MusicBand> read(String path) throws FileNotFoundException, IOException {
-        if (path == null) return null;
-        if (path.isEmpty()) return null;
+    public TreeSet<MusicBand> readCollection(String path) throws IOException {
+        String buffResult = read(path);
 
-        String buffResult;
+        if (buffResult.isEmpty()) buffResult = "[]";
+
+        return gson.fromJson(buffResult, new TypeToken<TreeSet<MusicBand>>() {}.getType());
+    }
+
+    public List<ParsedString> readCommands(String path, CommandManager commandManager) throws IOException {
+        String buffResult = read(path);
+
+        if (buffResult.isEmpty()) return  null;
+
+        String[] lines = buffResult.split(System.lineSeparator());
+
+        for (String line : lines) {
+
+        }
+        return null;
+    }
+
+    public String read(String path) throws IOException {
+        if (path == null || path.isEmpty()) return null;
 
         FileInputStream fileInputStream = new FileInputStream(path);
 
         BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 
         byte[] bytes = bufferedInputStream.readAllBytes();
-        buffResult = new String(bytes, StandardCharsets.UTF_8);
-
-        if (buffResult.isEmpty()) buffResult = "[]";
-
-        return gson.fromJson(buffResult, new TypeToken<TreeSet<MusicBand>>() {}.getType());
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 }
