@@ -24,7 +24,6 @@ public class CommandCountByNumberOfParticipants extends Command {
 
     private CollectionManager collectionManager;
 
-
     public CommandCountByNumberOfParticipants(String name, String description, CollectionManager collectionManager) {
         super(name, description);
 

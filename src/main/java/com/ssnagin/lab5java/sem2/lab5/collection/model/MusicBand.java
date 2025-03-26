@@ -160,6 +160,10 @@ public class MusicBand extends Entity<MusicBand> {
         if (result == 0) this.getSinglesCount().compareTo(otherMusicBand.getSinglesCount());
         
         if (result == 0) this.getCoordinates().compareTo(otherMusicBand.getCoordinates());
+
+        if (result == 0) this.getBestAlbum().compareTo(otherMusicBand.getBestAlbum());
+
+        if (result == 0) this.getGenre().compareTo(otherMusicBand.getGenre());
         
         return result;
     }

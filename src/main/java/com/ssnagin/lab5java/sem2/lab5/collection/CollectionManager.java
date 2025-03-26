@@ -98,6 +98,23 @@ public class CollectionManager {
         return this.collection.isEmpty();
     }
 
+    public int removeLower(MusicBand element) {
+        if (element == null || collection.isEmpty()) {
+            return 0;
+        }
+
+        // Получаем подмножество элементов, которые меньше заданного
+        TreeSet<MusicBand> lowerElements = new TreeSet<>(collection.tailSet(element, false));
+
+        // Запоминаем количество элементов для удаления
+        int count = lowerElements.size();
+
+        // Удаляем все элементы из основной коллекции
+        collection.removeAll(lowerElements);
+
+        return count;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
