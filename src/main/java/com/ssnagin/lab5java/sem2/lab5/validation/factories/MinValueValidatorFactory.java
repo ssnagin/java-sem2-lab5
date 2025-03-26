@@ -16,8 +16,13 @@ public class MinValueValidatorFactory<T extends Comparable<T>> implements Valida
 
     @Override
     public MinValueValidator<T> create(Annotation annotation) {
-        if(annotation instanceof MinValue minValueAnnotation)
-            return new MinValueValidator<>((T)minValueAnnotation.value()); //!!!
+        if (annotation instanceof MinValue minValueAnnotation) {
+            @SuppressWarnings("unchecked")
+            T minValue = (T) Long.valueOf(minValueAnnotation.value());
+
+            return new MinValueValidator<>(minValue);
+        }
+
         else throw new IllegalArgumentException("Incompatible annotation");
     }
 }

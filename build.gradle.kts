@@ -8,7 +8,6 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.peichhorn:lombok-pg:0.11.3")
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
 

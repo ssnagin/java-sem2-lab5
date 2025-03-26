@@ -24,7 +24,7 @@ import java.util.Scanner;
  */
 public class CommandAdd extends Command {
     
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
     private final Scanner scanner;
     
     public CommandAdd(String name, String description, CollectionManager collectionManager, Scanner scanner) {
@@ -47,9 +47,9 @@ public class CommandAdd extends Command {
         try {
             
             MusicBand musicBand = Reflections.parseModel(MusicBand.class, scanner);
-            
+
             if (musicBand == null) return ApplicationStatus.RUNNING;
-            
+
             var result = new LocalDateWrapper(
                     musicBand
             );
