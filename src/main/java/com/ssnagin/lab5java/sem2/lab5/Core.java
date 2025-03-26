@@ -76,6 +76,7 @@ public class Core {
         this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
         this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scanner));
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
+        this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
     }
 
     private void registerValidators() {
