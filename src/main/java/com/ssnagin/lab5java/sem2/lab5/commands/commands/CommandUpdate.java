@@ -52,7 +52,7 @@ public class CommandUpdate extends Command {
 //        )));
         
         if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().get(0))) 
+            if (" h".equals(parsedString.getArguments().getFirst()))
                 return this.showUsage(parsedString);
         }
         
@@ -60,13 +60,12 @@ public class CommandUpdate extends Command {
         
         // Try to parse Integer
         // VALIDATOR HERE
+
         try {
-            Console.log(parsedString.toString());
             id = (Long) Reflections.parsePrimitiveInput(
                     Long.class, 
-                    parsedString.getArguments().get(0)
+                    parsedString.getArguments().getFirst()
             );
-            Console.log(id);
         } catch (NumberFormatException ex) {
             Console.log("Неверный формат числа");
             return ApplicationStatus.RUNNING;

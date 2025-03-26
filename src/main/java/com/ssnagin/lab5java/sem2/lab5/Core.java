@@ -77,6 +77,7 @@ public class Core {
         this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scanner));
         this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
         this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
+        this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
     }
 
     private void registerValidators() {
