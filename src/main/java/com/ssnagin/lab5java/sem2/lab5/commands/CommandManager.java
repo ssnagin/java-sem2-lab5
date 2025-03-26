@@ -6,11 +6,11 @@ package com.ssnagin.lab5java.sem2.lab5.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandDefault;
 import com.ssnagin.lab5java.sem2.lab5.commands.interfaces.Manageable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
@@ -21,14 +21,15 @@ import lombok.ToString;
 @ToString
 public class CommandManager implements Manageable<Command> {
     
+    @Getter
     private static final CommandManager instance = new CommandManager();
     
+    @Getter
     private Map<String, Command> commands = new HashMap<>();
 
-    public static CommandManager getInstance() {
-        return instance;
-    }
-    
+    private Deque<Command> commandHistory = new ArrayDeque<>();
+    private final int MAX_HISTORY_SIZE = 9;
+
     @Override
     public void register(Command command) {
         commands.put(command.getName(), command);
@@ -37,18 +38,43 @@ public class CommandManager implements Manageable<Command> {
     @Override
     public Command get(String commandName) {
         Command command = commands.get(commandName);
-        return (command != null) ? command : new CommandDefault("", "");
+
+        if (command != null) {
+            addToHistory(command);
+            return command;
+        }
+
+        return new CommandDefault("", "");
     }
     
     public List<Command> getCommandsList() {  
         return new ArrayList<>(this.commands.values());
     }
-    
-    public Map<String, Command> getCommands() {
-        return this.commands;
-    }
-    
+
     private void setCommands(Map<String, Command>  commands) {
         this.commands = commands;
+    }
+
+    /**
+     * Добавляет команду в историю выполнения
+     */
+    public void addToHistory(Command command) {
+        // Удаляем самую старую команду, если достигли максимума
+        if (commandHistory.size() >= MAX_HISTORY_SIZE) {
+            commandHistory.removeLast();
+        }
+        commandHistory.push(command);
+    }
+
+    public List<Command> getCommandHistory() {
+        return new ArrayList<>(commandHistory);
+    }
+
+    public Command getLastCommand() {
+        return commandHistory.peek();
+    }
+
+    public void clearHistory() {
+        commandHistory.clear();
     }
 }

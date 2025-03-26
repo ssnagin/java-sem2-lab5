@@ -40,6 +40,13 @@ public class CollectionManager {
         
         return result;
     }
+
+    public MusicBand getLowestElement() {
+        if (this.collection.isEmpty()) {
+            return null;
+        }
+        return this.collection.getFirst();
+    }
     
     public void removeElementById(int otherId) {
         MusicBand result = this.getElementById(otherId);

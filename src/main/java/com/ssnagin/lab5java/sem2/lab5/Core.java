@@ -4,18 +4,11 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.*;
 import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandAdd;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandClear;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandRemoveById;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandShow;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandUpdate;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
@@ -81,6 +74,8 @@ public class Core {
         this.commandManager.register(new CommandClear("clear", "clear collection elements"));
         this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, scanner, commandManager));
         this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
+        this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scanner));
+        this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
     }
 
     private void registerValidators() {
