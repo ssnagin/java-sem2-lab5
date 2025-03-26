@@ -14,6 +14,7 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import java.util.Scanner;
 
+import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationManager;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
 import com.ssnagin.lab5java.sem2.lab5.validation.factories.*;
@@ -34,7 +35,9 @@ public class Core {
     private CommandManager commandManager;
     private InputParser inputParser;
     private Console console;
-    
+
+    private FileManager fileManager;
+
     private Scanner scanner;
     
     @Getter
@@ -58,6 +61,8 @@ public class Core {
         
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
+
+        this.fileManager = FileManager.getInstance();
         
         registerCommands();
         registerValidators();
@@ -68,7 +73,7 @@ public class Core {
     private void registerCommands() {
         this.commandManager.register(new CommandExit("exit", "exit this useless piece of masterpiece"));
         this.commandManager.register(new CommandHelp("help", "display help on available commands", commandManager));
-        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager));
+        this.commandManager.register(new CommandExecuteScript("execute_script", "some description here", commandManager, collectionManager));
         this.commandManager.register(new CommandAdd("add", "add an object to collection", collectionManager, scanner));
         this.commandManager.register(new CommandShow("show", "show collection's elements", collectionManager));
         this.commandManager.register(new CommandClear("clear", "clear collection elements"));
@@ -80,6 +85,7 @@ public class Core {
         this.commandManager.register(new CommandCountByNumberOfParticipants("count_by_number_of_participants", "count_by_number_of_participants <numberOfParticipants>| shows the amount of fields with the same amount of participants", collectionManager));
         this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scanner));
         this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
+        this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
     }
 
     private void registerValidators() {
@@ -92,15 +98,19 @@ public class Core {
 
     }
 
-    public void start() {
+    public void start(String[] args) {
         
         // Step-by-step description of the algorithm.
-        
-        // 0. First, print logo
-        
+
+        // 0. Load file if given here:
+
+        /// ///
+
+        // 1. First, print logo
+
         this.printLogo();
         
-        // 1. Wait for the user input. 
+        // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser
         
         Scanner scanner = new Scanner(System.in);
@@ -116,14 +126,14 @@ public class Core {
             
             parsedString = InputParser.parse(parsedString.getPureString(), ParseMode.COMMAND_ONLY);
 
-            // 1.1 If the string is null, skip the code:
+            // 2.1 If the string is null, skip the code:
 
             if (parsedString.isEmpty()) {
                 // ... some code
                 continue;
             }
 
-            // 2 Executing commands according to user's input
+            // 3 Executing commands according to user's input
             this.runCommand(parsedString);
         }
     }

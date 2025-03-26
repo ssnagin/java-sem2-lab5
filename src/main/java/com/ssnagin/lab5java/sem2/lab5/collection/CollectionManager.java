@@ -6,6 +6,7 @@ package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.TreeSet;
@@ -19,10 +20,11 @@ public class CollectionManager {
     // Using singleton
     
     @Getter
-    private static final CollectionManager instance = new CollectionManager();
+    private static CollectionManager instance = new CollectionManager();
     
     @Getter
-    private final TreeSet<MusicBand> collection = new TreeSet<>();
+    @Setter
+    private TreeSet<MusicBand> collection = new TreeSet<>();
 
     public void addElement(MusicBand element) {
         this.collection.add(element);

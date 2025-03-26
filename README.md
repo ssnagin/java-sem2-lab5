@@ -41,7 +41,7 @@
 наименьшего элемента этой коллекции
 + remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
 + history : вывести последние 9 команд (без их аргументов)
-- group_counting_by_creation_date : сгруппировать элементы коллекции по значению поля creationDate,
++ group_counting_by_creation_date : сгруппировать элементы коллекции по значению поля creationDate,
 вывести количество элементов в каждой группе
 + count_by_number_of_participants numberOfParticipants  : вывести количество элементов, значение поля
 numberOfParticipants которых равно заданному
