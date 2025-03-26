@@ -13,8 +13,12 @@ import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.description.DescriptionParser;
+import com.ssnagin.lab5java.sem2.lab5.validation.TempValidator;
+
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -55,6 +59,14 @@ public class CommandAdd extends Command {
             );
             
             // Final validation here;
+            List<String> errors = TempValidator.validateMusicBand(musicBand);
+
+            if (!errors.isEmpty()) {
+                for (String error : errors) {
+                    Console.error(error);
+                }
+                return ApplicationStatus.RUNNING;
+            }
             
             // Adding into CollectionManager with Creation Date:
             this.collectionManager.addElement(result);

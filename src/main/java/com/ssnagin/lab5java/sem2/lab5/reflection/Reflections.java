@@ -2,6 +2,7 @@ package com.ssnagin.lab5java.sem2.lab5.reflection;
 
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.validation.TempValidator;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -53,24 +54,18 @@ public final class Reflections {
             field.setAccessible(true);
             
             Description annotation = field.getAnnotation(Description.class);
-            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType().toString());
-            
-            Object value = Reflections.parseField(field.getType(), scanner);
-            
-//            ValidationError errors;
+            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType());
 
-//            MaxValueValidator validator = new MaxValueValidator();
-            
-//            errors = validator.validate(field, value);// ТУТ
-//
-//            if (errors != null) {
-//                Console.log(errors.toString());
-//                return null;
-//            }
-            
+            Object value = Reflections.parseField(field.getType(), scanner);
+
+            // КОСТЫЛЬ!!!
+
+
+            //ValidationManager.getInstance().validateField(value, field);
+
             Reflections.setFieldValue(instance, value);
         }
-        
+
         return instance;
     } 
     

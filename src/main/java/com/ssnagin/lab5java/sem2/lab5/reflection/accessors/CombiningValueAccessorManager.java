@@ -25,7 +25,7 @@ public class CombiningValueAccessorManager implements ValueAccessorManager {
         final List<ValueAccessor<T>> valueAccessors = valueAccessorFactories.stream().map(factory -> factory.create(valueClass, field)).toList();
         for (ValueAccessor<T> valueAccessor : valueAccessors) {
             try {
-                return valueClass.cast(valueAccessor.accessValue(object));
+                return valueClass.cast(valueAccessor.accessValue(object)); // Здесь всё ломается
             } catch (Exception exception) {
                 deferredExceptions.add(exception);
             }
