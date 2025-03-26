@@ -1,7 +1,10 @@
-package com.ssnagin.lab5java.sem2.lab5.reflections;
+package com.ssnagin.lab5java.sem2.lab5.reflection;
 
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
+import com.ssnagin.lab5java.sem2.lab5.validation.TempValidator;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -51,12 +54,18 @@ public final class Reflections {
             field.setAccessible(true);
             
             Description annotation = field.getAnnotation(Description.class);
-            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType().toString());
-            
+            Console.log("Введите " + annotation.name() + " (" + annotation.description() + ") " + field.getAnnotatedType());
+
             Object value = Reflections.parseField(field.getType(), scanner);
+
+            // КОСТЫЛЬ!!!
+
+
+            //ValidationManager.getInstance().validateField(value, field);
+
             Reflections.setFieldValue(instance, value);
         }
-        
+
         return instance;
     } 
     
@@ -244,5 +253,10 @@ public final class Reflections {
      */
     public static Object parseEnumInput(Class<?> type, String input) {
         return Enum.valueOf((Class<? extends Enum>) type, input);
+    }
+    
+    public static <T extends Annotation> T getAnnotation(Class<T> annotation, Field field) {
+        if (!field.isAnnotationPresent(annotation)) return null;
+        return field.getAnnotation(annotation);
     }
 }

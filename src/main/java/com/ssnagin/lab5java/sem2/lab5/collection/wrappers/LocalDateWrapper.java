@@ -12,7 +12,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Needs to make CreationDate if needed
+ * Wrapper for localDate
  * @author developer
  */
 
@@ -21,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 public class LocalDateWrapper extends MusicBand  {
-    protected LocalDate localDate;
+    protected LocalDate creationDate;
     
     public LocalDateWrapper(MusicBand base) {
         this(base, LocalDate.now());
@@ -38,6 +38,6 @@ public class LocalDateWrapper extends MusicBand  {
                 base.getBestAlbum()
         );
         
-        setLocalDate(localDate);
+        setCreationDate(localDate);
     }
 }

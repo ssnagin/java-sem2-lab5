@@ -4,23 +4,21 @@
  */
 package com.ssnagin.lab5java.sem2.lab5;
 
+import com.ssnagin.lab5java.sem2.lab5.commands.commands.*;
 import com.ssnagin.lab5java.sem2.lab5.console.InputParser;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandAdd;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandClear;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExecuteScript;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandExit;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandHelp;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandRemoveById;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandShow;
-import com.ssnagin.lab5java.sem2.lab5.commands.commands.CommandUpdate;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import java.util.Scanner;
+
+import com.ssnagin.lab5java.sem2.lab5.validation.ValidationManager;
+import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
+import com.ssnagin.lab5java.sem2.lab5.validation.factories.*;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
@@ -32,13 +30,16 @@ import lombok.ToString;
 public class Core {
     
     private CollectionManager collectionManager;
+    private ValidationManager validationManager;
     private CommandManager commandManager;
     private InputParser inputParser;
     private Console console;
     
     private Scanner scanner;
     
+    @Getter
     ApplicationStatus applicationStatus;
+
     public static final String ASCII_LOGO = " ▗▄▄▖ ▄▄▄  █ █ ▗▞▀▚▖▗▞▀▘   ■  ▄  ▄▄▄  ▄▄▄▄  ▗▖  ▗▖▗▞▀▜▌▄▄▄▄  ▗▞▀▜▌     ▗▞▀▚▖ ▄▄▄ \n" +
                                             "▐▌   █   █ █ █ ▐▛▀▀▘▝▚▄▖▗▄▟▙▄▖▄ █   █ █   █ ▐▛▚▞▜▌▝▚▄▟▌█   █ ▝▚▄▟▌     ▐▛▀▀▘█    \n" +
                                             "▐▌   ▀▄▄▄▀ █ █ ▝▚▄▄▖      ▐▌  █ ▀▄▄▄▀ █   █ ▐▌  ▐▌     █   █           ▝▚▄▄▖█    \n" +
@@ -51,11 +52,15 @@ public class Core {
         // Singletone pattern
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
+
+        // TEMPORARY SOLUTION
+        this.validationManager = ValidationManager.getInstance();
         
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
         
         registerCommands();
+        registerValidators();
         
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -69,6 +74,19 @@ public class Core {
         this.commandManager.register(new CommandClear("clear", "clear collection elements"));
         this.commandManager.register(new CommandUpdate("update", "update <id> | update values of selected collection by id", collectionManager, scanner, commandManager));
         this.commandManager.register(new CommandRemoveById("remove_by_id", "remove_by_id <id> | removes an element with selected id", collectionManager));
+        this.commandManager.register(new CommandAddIfMin("add_if_min", "adds an element into collection if it is the lowest element in it", collectionManager, commandManager, scanner));
+        this.commandManager.register(new CommandHistory("history", "shows last 9 executed commands", commandManager));
+        this.commandManager.register(new CommandPrintDescending("print_descending", "show collection's elements in reversed order", collectionManager));
+    }
+
+    private void registerValidators() {
+        this.validationManager.register(new MaxValueValidatorFactory<>());
+        this.validationManager.register(new MinValueValidatorFactory<>());
+        this.validationManager.register(new NegativeNumberValidatorFactory<>());
+        this.validationManager.register(new NotEmptyCharSequenceValidatorFactory<>());
+        this.validationManager.register(new NotNullValidatorFactory<>());
+        this.validationManager.register(new PositiveNumberValidatorFactory<>());
+
     }
 
     public void start() {
@@ -91,7 +109,6 @@ public class Core {
             
             // I need to replace this code for the future custom input (executeCommand from script) integration.
             
-
             parsedString = new ParsedString(scanner.nextLine());
             
             parsedString = InputParser.parse(parsedString.getPureString(), ParseMode.COMMAND_ONLY);
@@ -126,11 +143,7 @@ public class Core {
             this.onExit();
         }
     }
-    
-    public ApplicationStatus getApplicationStatus() {
-        return this.applicationStatus;
-    }
-    
+
     // === EVENTS ==== //
     
     public void onExit() {

@@ -7,6 +7,8 @@ package com.ssnagin.lab5java.sem2.lab5.console;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -17,9 +19,14 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class ParsedString {
     
+    @Getter
+    @Setter
     private String pureString;
     
+    @Getter
     private String command;
+    
+    @Getter
     private List<String> arguments;
     
     public ParsedString(String pureString, String command, List<String> arguments) {
@@ -44,22 +51,10 @@ public class ParsedString {
         this.command = command.toLowerCase();
     }
     
-    public String getCommand() {
-        return this.command;
-    }
-    
-    public String getPureString() {
-        return this.pureString;
-    }
-    
-    public List<String> getArguments() {
-        return this.arguments;
-    }
-    
     public String getRowArguments() {
         StringBuilder stringBuilder = new StringBuilder();
         
-        for (String element : this.arguments) {
+        for (String element : this.getArguments()) {
             stringBuilder.append(element);
         }
         
@@ -92,9 +87,5 @@ public class ParsedString {
     
     public boolean isEmpty() {
         return this.getPureString().isEmpty() || this.getCommand() == null || this.getCommand().isEmpty();
-    }
-
-    private void setPureString(String pureString) {
-        this.pureString = pureString;
     }
 }

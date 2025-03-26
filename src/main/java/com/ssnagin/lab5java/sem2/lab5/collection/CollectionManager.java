@@ -5,7 +5,9 @@
 package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import java.util.Iterator;
+import lombok.Getter;
+
+import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -16,14 +18,12 @@ public class CollectionManager {
     
     // Using singleton
     
+    @Getter
     private static final CollectionManager instance = new CollectionManager();
     
+    @Getter
     private final TreeSet<MusicBand> collection = new TreeSet<>();
-    
-    public static CollectionManager getInstance() {
-        return instance;
-    }
-    
+
     public void addElement(MusicBand element) {
         this.collection.add(element);
     }
@@ -39,6 +39,13 @@ public class CollectionManager {
         }
         
         return result;
+    }
+
+    public MusicBand getLowestElement() {
+        if (this.collection.isEmpty()) {
+            return null;
+        }
+        return this.collection.getFirst();
     }
     
     public void removeElementById(int otherId) {
@@ -67,7 +74,7 @@ public class CollectionManager {
     public MusicBand getElementById(Long id) {
 
         for (MusicBand element : this.collection) {
-            if (element.getId() == id) return element;
+            if (Objects.equals(element.getId(), id)) return element;
         }
         return null;
     }
@@ -90,11 +97,7 @@ public class CollectionManager {
     public boolean isEmpty() {
         return this.collection.isEmpty();
     }
-    
-    public TreeSet<MusicBand> getCollection() {
-        return this.collection;
-    }
-    
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
