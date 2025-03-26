@@ -164,6 +164,8 @@ public class MusicBand extends Entity<MusicBand> {
         if (result == 0) this.getBestAlbum().compareTo(otherMusicBand.getBestAlbum());
 
         if (result == 0) this.getGenre().compareTo(otherMusicBand.getGenre());
+
+        if (result == 0) this.getId().compareTo(otherMusicBand.getId());
         
         return result;
     }

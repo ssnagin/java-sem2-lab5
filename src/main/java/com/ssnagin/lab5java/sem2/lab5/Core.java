@@ -114,21 +114,27 @@ public class Core {
         return inputScanners.peek();
     }
 
-    public void pushFileScanner(File file) throws Exception {
+    public void pushFileScanner(File file) throws IOException {
         String canonicalPath = file.getCanonicalPath();
         if (activeScripts.contains(canonicalPath)) {
-            throw new Exception("Recursion: " + canonicalPath);
+            throw new IOException();
         }
         activeScripts.add(canonicalPath);
         inputScanners.push(new Scanner(file));
     }
 
-    public void popScanner() {
+    public void popScanner(File file) throws IOException {
         if (inputScanners.size() > 1) {
-            Scanner oldScanner = inputScanners.pop();
-            activeScripts.remove(oldScanner.toString());
-            oldScanner.close();
+            Scanner scn = inputScanners.pop();
+            Console.log(scn.toString());
+            activeScripts.remove(file.getCanonicalPath());
+            scn.close();
         }
+    }
+
+    public void clearActiveScripts() {
+        return;
+        //this.activeScripts.clear();
     }
 
     private void registerValidators() {

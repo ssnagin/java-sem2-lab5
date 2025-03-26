@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
@@ -59,7 +60,7 @@ public class FileManager {
 
         if (buffResult.isEmpty()) buffResult = "[]";
 
-        return gson.fromJson(buffResult, new TypeToken<TreeSet<MusicBand>>() {}.getType());
+        return gson.fromJson(buffResult, new TypeToken<TreeSet<LocalDateWrapper>>() {}.getType());
     }
 
     public List<ParsedString> readCommands(String path, CommandManager commandManager) throws IOException {

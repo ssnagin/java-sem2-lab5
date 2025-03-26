@@ -49,9 +49,10 @@ public class CommandExecuteScript extends Command {
 
         Console.println(parsedString);
 
+        File file = new File(parsedString.getCommand());
 
         try {
-            ((Core) Core.getInstance()).pushFileScanner(new File(parsedString.getCommand()));
+            ((Core) Core.getInstance()).pushFileScanner(file);
 
             while (((Core) Core.getInstance()).getCurrentScanner().hasNextLine()) {
                 String line = ((Core) Core.getInstance()).getCurrentScanner().nextLine().trim();
@@ -60,20 +61,24 @@ public class CommandExecuteScript extends Command {
                 ParsedString scriptCommand = InputParser.parse(line, ParseMode.COMMAND_ONLY);
                 Command command = commandManager.get(scriptCommand.getCommand());
 
-                if (command != null) {
-                    command.executeCommand(scriptCommand);
-                } else {
-                    Console.error("Unknown command in script: " + scriptCommand.getCommand());
-                }
+                command.executeCommand(scriptCommand);
             }
         } catch (IOException e) {
             Console.error("Script file not found: " + e.getMessage());
+
         } catch (Exception e) {
-            Console.error("Recursion detected!");
-        } finally {
-            // Возвращаем ввод к предыдущему источнику (клавиатура или родительский скрипт)
-            ((Core) Core.getInstance()).popScanner();
+            Console.error("Recursion detected! " + e.getMessage());
+            ((Core) Core.getInstance()).clearActiveScripts();
+            return ApplicationStatus.RUNNING;
         }
+        //finally {
+        try {
+            ((Core) Core.getInstance()).popScanner(file);
+        } catch (IOException e) {
+            Console.error("Error while accessing to File, stop all executables...");
+            ((Core) Core.getInstance()).clearActiveScripts();
+        }
+        //}
 
         return ApplicationStatus.RUNNING;
     }
