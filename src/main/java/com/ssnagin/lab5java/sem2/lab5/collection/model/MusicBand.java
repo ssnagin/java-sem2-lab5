@@ -158,18 +158,18 @@ public class MusicBand extends Entity<MusicBand> {
     public int compareTo(MusicBand otherMusicBand) {
 
         if (otherMusicBand == null) return 1;
-        
+
         int result = this.getName().compareTo(otherMusicBand.getName());
         
-        if (result == 0) this.getSinglesCount().compareTo(otherMusicBand.getSinglesCount());
+        if (result == 0) result = this.getSinglesCount().compareTo(otherMusicBand.getSinglesCount());
         
-        if (result == 0) this.getCoordinates().compareTo(otherMusicBand.getCoordinates());
+        if (result == 0) result = this.getCoordinates().compareTo(otherMusicBand.getCoordinates());
 
-        if (result == 0) this.getBestAlbum().compareTo(otherMusicBand.getBestAlbum());
+        if (result == 0) result = this.getBestAlbum().compareTo(otherMusicBand.getBestAlbum());
 
-        if (result == 0) this.getGenre().compareTo(otherMusicBand.getGenre());
+        if (result == 0) result = this.getGenre().compareTo(otherMusicBand.getGenre());
 
-        if (result == 0) this.getId().compareTo(otherMusicBand.getId());
+        if (result == 0) result = this.getId().compareTo(otherMusicBand.getId());
         
         return result;
     }

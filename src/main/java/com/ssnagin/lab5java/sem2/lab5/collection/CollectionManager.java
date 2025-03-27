@@ -8,10 +8,7 @@ import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * 
@@ -36,12 +33,11 @@ public class CollectionManager {
         MusicBand result = null;
         
         for (MusicBand row : this.collection) {
-            if (((Long) row.getId()).equals(otherId)) {
+            if ((row.getId()).equals(otherId)) {
                 result = row;
                 break;
             }
         }
-        
         return result;
     }
 
@@ -52,25 +48,12 @@ public class CollectionManager {
         return this.collection.getFirst();
     }
     
-    public void removeElementById(int otherId) {
-        MusicBand result = this.getElementById(otherId);
-        if (result != null) this.removeElement(result);
-    }
-    
     public void removeElement(MusicBand musicBand) {
         this.collection.remove(musicBand);
     }
     
     public void removeAllElements() {this.collection.clear();}
-    
-    public MusicBand getLastElement() {
-        return this.collection.last();
-    }
-    
-    public MusicBand getFirstElement() {
-        return this.collection.first();
-    }
-    
+
     public MusicBand getElementById(Long id) {
 
         for (MusicBand element : this.getCollection()) {
@@ -79,15 +62,13 @@ public class CollectionManager {
         return null;
     }
     
-    public boolean removeElementById(Long id) {
+    public void removeElementById(Long id) {
         
         MusicBand toRemove = getElementById(id);
         
-        if (toRemove == null) return false;
+        if (toRemove == null) throw new NoSuchElementException("No such element with id");
         
-        this.collection.remove(toRemove);
-        
-        return true;
+        this.removeElement(toRemove);
     }
     
     public int getSize() {

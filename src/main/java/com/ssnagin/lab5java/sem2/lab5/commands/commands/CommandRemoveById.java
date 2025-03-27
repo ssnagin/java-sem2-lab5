@@ -10,6 +10,8 @@ import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 
+import java.util.NoSuchElementException;
+
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  * 
@@ -29,7 +31,7 @@ public class CommandRemoveById extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         
         if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().get(0)))
+            if ("h".equals(parsedString.getArguments().getFirst()))
                 return this.showUsage(parsedString);
         }
         
@@ -38,7 +40,7 @@ public class CommandRemoveById extends Command {
         // Try to parse Integer
         // VALIDATOR HERE
         try {
-            id = Long.parseLong(parsedString.getArguments().get(0));
+            id = Long.parseLong(parsedString.getArguments().getFirst());
         } catch (NumberFormatException ex) {
             Console.log("Wrong number format");
             return ApplicationStatus.RUNNING;
@@ -50,9 +52,11 @@ public class CommandRemoveById extends Command {
             Console.log("Whoops, there is no collection with this element!");
             return ApplicationStatus.RUNNING;
         }
-        
-        if (!this.collectionManager.removeElementById(id)) {
-            Console.log("Something went wrong, the element with id="+ id.toString() + " was not removed from collection!");
+
+        try {
+            this.collectionManager.removeElementById(id);
+        } catch (NoSuchElementException e) {
+            Console.log("Something went wrong, the element with id="+ id + " was not removed from collection!");
         }
         
         return ApplicationStatus.RUNNING;

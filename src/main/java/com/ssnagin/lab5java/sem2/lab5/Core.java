@@ -27,6 +27,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
 
 /**
  * 
@@ -40,11 +42,10 @@ public class Core {
     private static Core instance = new Core();
     
     private CollectionManager collectionManager;
-    private ValidationManager validationManager;
+    //private ValidationManager validationManager;
     private CommandManager commandManager;
     private Set<String> activeScripts;
     private InputParser inputParser;
-    private Console console;
 
     private FileManager fileManager;
 
@@ -66,8 +67,8 @@ public class Core {
     
     public Core() {
 
-
         this.defaultScanner = new Scanner(System.in);
+
         inputScanners = new Stack<>();
         this.inputScanners.push(defaultScanner);
 
@@ -75,20 +76,14 @@ public class Core {
         this.collectionManager = CollectionManager.getInstance();
         this.commandManager = CommandManager.getInstance();
 
-        // TEMPORARY SOLUTION
-        this.validationManager = ValidationManager.getInstance();
-
         this.inputParser = new InputParser();
         this.scanner = new Scanner(System.in);
 
         this.fileManager = FileManager.getInstance();
 
-
         activeScripts = new HashSet<>();
 
         registerCommands();
-        registerValidators();
-
 
         this.setApplicationStatus(ApplicationStatus.RUNNING);
     }
@@ -144,16 +139,6 @@ public class Core {
         this.activeScripts.clear();
     }
 
-    private void registerValidators() {
-        this.validationManager.register(new MaxValueValidatorFactory<>());
-        this.validationManager.register(new MinValueValidatorFactory<>());
-        this.validationManager.register(new NegativeNumberValidatorFactory<>());
-        this.validationManager.register(new NotEmptyCharSequenceValidatorFactory<>());
-        this.validationManager.register(new NotNullValidatorFactory<>());
-        this.validationManager.register(new PositiveNumberValidatorFactory<>());
-
-    }
-
     public void start(String[] args) {
         
         // Step-by-step description of the algorithm.
@@ -162,11 +147,19 @@ public class Core {
 
         this.printLogo();
 
+        // 0.5 Register SIGINT:
+
+        Signal.handle(new Signal("INT"), new SignalHandler() {  // Ctrl+C
+            @Override
+            public void handle(Signal sig) {
+                onExit();
+            }
+        });
+
         // 1. Load file if given here:
 
         if (args.length > 0) {
             String path = String.join("", args);
-
             try {
                 TreeSet<MusicBand> elements = fileManager.readCollection(path);
                 this.collectionManager.setCollection(elements);
@@ -178,7 +171,6 @@ public class Core {
         // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser
 
-        Scanner scanner = new Scanner(System.in);
         ParsedString parsedString;
 
         while (true) {
