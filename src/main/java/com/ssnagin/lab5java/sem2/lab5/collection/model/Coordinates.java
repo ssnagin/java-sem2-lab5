@@ -56,7 +56,7 @@ public class Coordinates extends Entity<Coordinates> {
     public int compareTo(Coordinates otherCoordinates) {
         int result = this.x.compareTo(otherCoordinates.x);
         
-        if (result == 0) this.y.compareTo(otherCoordinates.y);
+        if (result == 0) result = this.y.compareTo(otherCoordinates.y);
         
         return result;
     }

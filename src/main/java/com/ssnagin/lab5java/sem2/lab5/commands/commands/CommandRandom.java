@@ -52,8 +52,9 @@ public class CommandRandom extends Command {
         try {
             id = Long.parseLong(parsedString.getArguments().getFirst());
 
-            if (id.compareTo((long) MAX_RANDOM_AMOUNT) == -1) {
+            if (id > MAX_RANDOM_AMOUNT) {
                 Console.log("Max amount error");
+                return ApplicationStatus.RUNNING;
             }
 
         } catch (NumberFormatException ex) {

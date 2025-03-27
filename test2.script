@@ -2,4 +2,5 @@ execute_script test.script
 execute_script test.script
 execute_script test.script
 execute_script test.script
-execute_script test.script
+execute_script test3.script
+random 398

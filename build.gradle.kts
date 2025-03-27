@@ -1,13 +1,20 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     application
     java
+    id("com.github.johnrengelman.shadow") version "7.1.2";
 }
 
 repositories {
+    gradlePluginPortal()
     mavenCentral()
 }
 
 dependencies {
+
+
+
     compileOnly("org.projectlombok:lombok:1.18.36")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
 
@@ -33,6 +40,20 @@ application {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("java-sem2-lab5")
+    archiveVersion.set("1.0.0")
+    archiveClassifier.set("")
+    manifest {
+        attributes["Main-Class"] = "com.ssnagin.lab5java.sem2.lab5.App"
+    }
+    mergeServiceFiles()
+}
+
+tasks.assemble {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.jar {

@@ -156,6 +156,8 @@ public class MusicBand extends Entity<MusicBand> {
     
     @Override
     public int compareTo(MusicBand otherMusicBand) {
+
+        if (otherMusicBand == null) return 1;
         
         int result = this.getName().compareTo(otherMusicBand.getName());
         

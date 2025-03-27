@@ -25,7 +25,7 @@ import lombok.ToString;
 @Setter
 public class LocalDateWrapper extends MusicBand  {
     protected LocalDate creationDate;
-    
+
     public LocalDateWrapper(MusicBand base) {
         this(base, LocalDate.now());
     }
@@ -50,5 +50,17 @@ public class LocalDateWrapper extends MusicBand  {
             new MusicBand().random(),
             new RandomLocalDateGenerator<>().random()
         );
+    }
+
+
+    public int compareTo(LocalDateWrapper otherLocalDateWrapper) {
+
+        if (otherLocalDateWrapper == null) return 1;
+
+        int result = super.compareTo(otherLocalDateWrapper);
+
+        if (result == 0) result = this.creationDate.compareTo(otherLocalDateWrapper.creationDate);
+
+        return result;
     }
 }
