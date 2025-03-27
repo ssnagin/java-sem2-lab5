@@ -29,7 +29,7 @@ public class CommandRemoveById extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         
         if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().get(0))) 
+            if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
         

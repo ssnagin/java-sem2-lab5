@@ -46,7 +46,7 @@ public class CommandAddIfMin extends Command {
         this.scanner = Core.getInstance().getCurrentScanner();
 
         if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().get(0)))
+            if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
 

@@ -52,7 +52,7 @@ public class CommandUpdate extends Command {
 //        )));
         
         if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().getFirst()))
+            if ("h".equals(parsedString.getArguments().getFirst()))
                 return this.showUsage(parsedString);
         }
         

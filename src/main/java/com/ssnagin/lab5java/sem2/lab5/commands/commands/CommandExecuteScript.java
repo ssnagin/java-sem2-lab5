@@ -17,6 +17,7 @@ import com.ssnagin.lab5java.sem2.lab5.console.ParseMode;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
 import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
 import com.ssnagin.lab5java.sem2.lab5.files.adapters.LocalDateAdapter;
+import com.ssnagin.lab5java.sem2.lab5.scripts.exceptions.ScriptRecursionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,8 +32,8 @@ import java.util.TreeSet;
  */
 public class CommandExecuteScript extends Command {
     
-    private CommandManager commandManager;
-    private CollectionManager collectionManager;
+    private final CommandManager commandManager;
+    private final CollectionManager collectionManager;
     
     public CommandExecuteScript(String name, String description, CommandManager commandManager, CollectionManager collectionManager) {
         super(name, description);
@@ -47,15 +48,13 @@ public class CommandExecuteScript extends Command {
         
         parsedString = InputParser.parse(parsedString.getRowArguments(), ParseMode.COMMAND_ONLY);
 
-        Console.println(parsedString);
-
         File file = new File(parsedString.getCommand());
 
         try {
-            ((Core) Core.getInstance()).pushFileScanner(file);
+            Core.getInstance().pushFileScanner(file);
 
-            while (((Core) Core.getInstance()).getCurrentScanner().hasNextLine()) {
-                String line = ((Core) Core.getInstance()).getCurrentScanner().nextLine().trim();
+            while (Core.getInstance().getCurrentScanner().hasNextLine()) {
+                String line = Core.getInstance().getCurrentScanner().nextLine().trim();
                 if (line.isEmpty()) continue;
 
                 ParsedString scriptCommand = InputParser.parse(line, ParseMode.COMMAND_ONLY);
@@ -68,14 +67,17 @@ public class CommandExecuteScript extends Command {
         } catch (IOException e) {
             Console.error("Script file not found: " + e.getMessage());
 
-        } catch (Exception e) {
+        } catch (ScriptRecursionException e) {
             Console.error("Recursion detected! " + e.getMessage());
-            ((Core) Core.getInstance()).clearActiveScripts();
+            Core.getInstance().clearActiveScripts();
+            Core.getInstance().removeScanners();
             return ApplicationStatus.RUNNING;
+        } catch (Exception e) {
+            Console.error("Un");
         }
         //finally {
         try {
-            ((Core) Core.getInstance()).popScanner(file);
+            Core.getInstance().popScanner(file);
         } catch (IOException e) {
             Console.error("Error while accessing to File, stop all executables...");
         }

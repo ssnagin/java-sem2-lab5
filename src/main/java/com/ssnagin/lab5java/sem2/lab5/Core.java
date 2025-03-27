@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.*;
 
 import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
+import com.ssnagin.lab5java.sem2.lab5.scripts.exceptions.ScriptRecursionException;
 import com.ssnagin.lab5java.sem2.lab5.validation.ValidationManager;
 import com.ssnagin.lab5java.sem2.lab5.validation.factories.*;
 import lombok.EqualsAndHashCode;
@@ -109,17 +110,16 @@ public class Core {
         this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
         this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
-
     }
 
     public Scanner getCurrentScanner() {
         return inputScanners.peek();
     }
 
-    public void pushFileScanner(File file) throws IOException {
+    public void pushFileScanner(File file) throws IOException, ScriptRecursionException {
         String canonicalPath = file.getCanonicalPath();
         if (activeScripts.contains(canonicalPath)) {
-            throw new IOException();
+            throw new ScriptRecursionException("Recursion Detected!");
         }
         activeScripts.add(canonicalPath);
         inputScanners.push(new Scanner(file));
@@ -128,8 +128,14 @@ public class Core {
     public void popScanner(File file) throws IOException {
         if (inputScanners.size() > 1) {
             Scanner scn = inputScanners.pop();
-            Console.log(scn.toString());
             activeScripts.remove(file.getCanonicalPath());
+            scn.close();
+        }
+    }
+
+    public void removeScanners() {
+        while (inputScanners.size() > 1) {
+            Scanner scn = inputScanners.pop();
             scn.close();
         }
     }
