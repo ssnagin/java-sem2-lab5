@@ -4,6 +4,7 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.generators.RandomEnumGenerator;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
@@ -13,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Class for describing Music Bands
@@ -154,13 +156,32 @@ public class MusicBand extends Entity<MusicBand> {
     
     @Override
     public int compareTo(MusicBand otherMusicBand) {
+
+        if (otherMusicBand == null) return 1;
         
         int result = this.getName().compareTo(otherMusicBand.getName());
         
         if (result == 0) this.getSinglesCount().compareTo(otherMusicBand.getSinglesCount());
         
         if (result == 0) this.getCoordinates().compareTo(otherMusicBand.getCoordinates());
+
+        if (result == 0) this.getBestAlbum().compareTo(otherMusicBand.getBestAlbum());
+
+        if (result == 0) this.getGenre().compareTo(otherMusicBand.getGenre());
+
+        if (result == 0) this.getId().compareTo(otherMusicBand.getId());
         
         return result;
+    }
+
+    public MusicBand random() {
+        this.setBestAlbum(new Album().random());
+        this.setCoordinates(new Coordinates().random());
+        this.setGenre((MusicGenre) new RandomEnumGenerator(MusicGenre.class).random());
+        this.setName(RandomStringUtils.random(RANDOM_STRING_LENGTH));
+        this.setSinglesCount(random.nextInt(0, Integer.MAX_VALUE));
+        this.setNumberOfParticipants(random.nextLong(0, Long.MAX_VALUE));
+
+        return this;
     }
 }

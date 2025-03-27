@@ -5,12 +5,14 @@
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.interfaces.Describable;
+import com.ssnagin.lab5java.sem2.lab5.collection.interfaces.Randomize;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.EqualsAndHashCode;
 
 /**
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
  * @author developer
  */
 @EqualsAndHashCode
-public abstract class Entity<T> implements Describable, Comparable<T> {
+public abstract class Entity<T> implements Describable, Comparable<T>, Randomize<T> {
     
     @Override
     public abstract int compareTo(T object);

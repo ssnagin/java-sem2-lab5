@@ -54,25 +54,4 @@ public class ValidationManager {
         }
         return null;
     }
-
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private void validateWithFactory(Object object, Field field, Annotation annotation, ValidatorFactory factory) {
-
-        try {
-            CombiningValueAccessorManager valueAccessorManager = new CombiningValueAccessorManager();
-
-            Object fieldValue = valueAccessorManager.accessValue(field.getType(), field, object);
-
-            Validator validator = factory.create(annotation);
-
-            validator.validate(fieldValue);
-        } catch (Exception e) {
-            throw new ValidationException(
-                    String.format("Validation failed for field '%s' in class %s: %s",
-                            field.getName(),
-                            object.getClass().getName(),
-                            e.getMessage()),
-                    e);
-        }
-    }
 }

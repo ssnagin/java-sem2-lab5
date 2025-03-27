@@ -11,6 +11,7 @@ import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
  * @author DEVELOPER
  */
 public enum MusicGenre {
+
     @Description(
         name="психоделический рок", 
         description="Ну только самые отбитые шизофреники под такое танцуют"

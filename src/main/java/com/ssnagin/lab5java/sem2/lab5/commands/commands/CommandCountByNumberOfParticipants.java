@@ -6,55 +6,54 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
+import com.ssnagin.lab5java.sem2.lab5.commands.CommandManager;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
+import com.ssnagin.lab5java.sem2.lab5.reflection.Reflections;
+
+import java.util.NoSuchElementException;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  * 
  * @author developer
  */
-public class CommandRemoveById extends Command {
-    
+public class CommandCountByNumberOfParticipants extends Command {
+
     private CollectionManager collectionManager;
-    
-    public CommandRemoveById(String name, String description, CollectionManager collectionManager) {
+
+    public CommandCountByNumberOfParticipants(String name, String description, CollectionManager collectionManager) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
-        if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().get(0)))
-                return this.showUsage(parsedString);
-        }
-        
-        Long id;
-        
-        // Try to parse Integer
-        // VALIDATOR HERE
+
+        long counter = 0;
+        long numberOfParticipants;
+
         try {
-            id = Long.parseLong(parsedString.getArguments().get(0));
+            numberOfParticipants = (Long) Reflections.parsePrimitiveInput(
+                    Long.class,
+                    parsedString.getArguments().getFirst()
+            );
         } catch (NumberFormatException ex) {
-            Console.log("Wrong number format");
+            Console.log("Неверный формат числа");
             return ApplicationStatus.RUNNING;
-        } catch (IndexOutOfBoundsException ex) {
+        } catch (IndexOutOfBoundsException | NoSuchElementException ex) {
             return this.showUsage(parsedString);
         }
-        
-        if (this.collectionManager.getElementById(id) == null) {
-            Console.log("Whoops, there is no collection with this element!");
-            return ApplicationStatus.RUNNING;
+
+        for (MusicBand musicBand : this.collectionManager.getCollection()) {
+            if (numberOfParticipants == musicBand.getNumberOfParticipants()) counter += 1;
         }
-        
-        if (!this.collectionManager.removeElementById(id)) {
-            Console.log("Something went wrong, the element with id="+ id.toString() + " was not removed from collection!");
-        }
-        
+
+        Console.separatePrint(counter, "AMOUNT");
+
         return ApplicationStatus.RUNNING;
     }
 }

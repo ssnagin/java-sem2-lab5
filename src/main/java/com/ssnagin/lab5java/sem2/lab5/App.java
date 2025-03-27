@@ -11,6 +11,8 @@ import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.Arrays;
+
 /**
  * Entry script for running Application
  * @author developer
@@ -19,24 +21,7 @@ import lombok.ToString;
 @ToString
 public class App {
     public static void main(String[] args) {
-        
-        /*
-        
-        Code for the future
-        
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JPG & GIF Images", "jpg", "gif");
-        chooser.setFileFilter(filter);
-        int returnVal = chooser.showOpenDialog(null);
-        if(returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("You chose to open this file: " +
-                    chooser.getSelectedFile().toString());
-        }
-        */
-        
-        Core core = new Core();
-        core.start();
+        Core.getInstance().start(args);
     }
     
     public static void run() {

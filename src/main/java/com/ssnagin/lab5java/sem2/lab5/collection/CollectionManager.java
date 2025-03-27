@@ -6,7 +6,10 @@ package com.ssnagin.lab5java.sem2.lab5.collection;
 
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 
@@ -19,10 +22,11 @@ public class CollectionManager {
     // Using singleton
     
     @Getter
-    private static final CollectionManager instance = new CollectionManager();
+    private static CollectionManager instance = new CollectionManager();
     
     @Getter
-    private final TreeSet<MusicBand> collection = new TreeSet<>();
+    @Setter
+    private TreeSet<MusicBand> collection = new TreeSet<>();
 
     public void addElement(MusicBand element) {
         this.collection.add(element);
@@ -57,11 +61,7 @@ public class CollectionManager {
         this.collection.remove(musicBand);
     }
     
-    public void removeAllElements() {
-        for (MusicBand element : this.collection) {
-            this.removeElement(element);
-        }
-    }
+    public void removeAllElements() {this.collection.clear();}
     
     public MusicBand getLastElement() {
         return this.collection.last();
@@ -73,7 +73,7 @@ public class CollectionManager {
     
     public MusicBand getElementById(Long id) {
 
-        for (MusicBand element : this.collection) {
+        for (MusicBand element : this.getCollection()) {
             if (Objects.equals(element.getId(), id)) return element;
         }
         return null;
@@ -96,6 +96,23 @@ public class CollectionManager {
     
     public boolean isEmpty() {
         return this.collection.isEmpty();
+    }
+
+    public int removeLower(MusicBand element) {
+        if (element == null || collection.isEmpty()) {
+            return 0;
+        }
+
+        // Получаем подмножество элементов, которые меньше заданного
+        TreeSet<MusicBand> lowerElements = new TreeSet<>(collection.tailSet(element, false));
+
+        // Запоминаем количество элементов для удаления
+        int count = lowerElements.size();
+
+        // Удаляем все элементы из основной коллекции
+        collection.removeAll(lowerElements);
+
+        return count;
     }
 
     @Override

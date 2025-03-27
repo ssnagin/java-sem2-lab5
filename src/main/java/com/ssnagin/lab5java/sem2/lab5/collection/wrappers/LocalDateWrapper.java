@@ -4,8 +4,11 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.wrappers;
 
+import com.ssnagin.lab5java.sem2.lab5.collection.generators.RandomLocalDateGenerator;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
 import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +25,7 @@ import lombok.ToString;
 @Setter
 public class LocalDateWrapper extends MusicBand  {
     protected LocalDate creationDate;
-    
+
     public LocalDateWrapper(MusicBand base) {
         this(base, LocalDate.now());
     }
@@ -37,7 +40,27 @@ public class LocalDateWrapper extends MusicBand  {
                 base.getGenre(),
                 base.getBestAlbum()
         );
-        
         setCreationDate(localDate);
+    }
+
+    @Override
+    public LocalDateWrapper random() {
+
+        return new LocalDateWrapper(
+            new MusicBand().random(),
+            new RandomLocalDateGenerator<>().random()
+        );
+    }
+
+
+    public int compareTo(LocalDateWrapper otherLocalDateWrapper) {
+
+        if (otherLocalDateWrapper == null) return 1;
+
+        int result = super.compareTo(otherLocalDateWrapper);
+
+        if (result == 0) result = this.creationDate.compareTo(otherLocalDateWrapper.creationDate);
+
+        return result;
     }
 }

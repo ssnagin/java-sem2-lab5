@@ -6,45 +6,48 @@ package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicGenre;
-import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
+import com.ssnagin.lab5java.sem2.lab5.files.FileManager;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
 
 /**
- * Shows brief description about available commands
+ * Throws when other commands does not exist. The only one unregistered command!
  * 
  * @author developer
  */
-public class CommandShow extends Command {
-    
+public class CommandSave extends Command {
+
     private CollectionManager collectionManager;
-    
-    public CommandShow(String name, String description, CollectionManager collectionManager) {
+    private FileManager fileManager;
+
+    public CommandSave(String name, String description, CollectionManager collectionManager, FileManager fileManager) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
+        this.fileManager = fileManager;
     }
-    
+
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
-        if (this.collectionManager.isEmpty()) {
-            Console.log("Collection is empty!");
-            return ApplicationStatus.RUNNING;
-        } 
 
-        Long counter = 0L;
+        Console.println(parsedString);
 
-        for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            counter += 1;
-            Console.println(Long.toString(counter) + " | ========\n" + musicBand.getDescription());
+        String path = parsedString.getArguments().getFirst();
+
+        try {
+            fileManager.write(this.collectionManager.getCollection(), path);
+        } catch (Exception ex) {
+            Console.error(ex);
         }
-        
+
         return ApplicationStatus.RUNNING;
     }
 }

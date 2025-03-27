@@ -5,56 +5,73 @@
 package com.ssnagin.lab5java.sem2.lab5.commands.commands;
 
 import com.ssnagin.lab5java.sem2.lab5.ApplicationStatus;
+import com.ssnagin.lab5java.sem2.lab5.Core;
 import com.ssnagin.lab5java.sem2.lab5.collection.CollectionManager;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
+import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
+import com.ssnagin.lab5java.sem2.lab5.collection.wrappers.LocalDateWrapper;
 import com.ssnagin.lab5java.sem2.lab5.commands.Command;
 import com.ssnagin.lab5java.sem2.lab5.console.Console;
 import com.ssnagin.lab5java.sem2.lab5.console.ParsedString;
+import org.apache.commons.lang3.RandomStringUtils;
+
+import java.util.Random;
+import java.util.RandomAccess;
 
 /**
  * Throws when other commands does not exist. The only one unregistered command!
  * 
  * @author developer
  */
-public class CommandRemoveById extends Command {
-    
+public class CommandRandom extends Command {
+
     private CollectionManager collectionManager;
-    
-    public CommandRemoveById(String name, String description, CollectionManager collectionManager) {
+
+    private static final int MAX_RANDOM_AMOUNT = 5000;
+
+
+    public CommandRandom(String name, String description, CollectionManager collectionManager) {
         super(name, description);
-        
+
         this.collectionManager = collectionManager;
     }
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-        
+
         if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().get(0)))
+            if (" h".equals(parsedString.getArguments().getFirst()))
                 return this.showUsage(parsedString);
         }
-        
+
         Long id;
-        
+
         // Try to parse Integer
         // VALIDATOR HERE
         try {
-            id = Long.parseLong(parsedString.getArguments().get(0));
+            id = Long.parseLong(parsedString.getArguments().getFirst());
+
+            if (id > MAX_RANDOM_AMOUNT) {
+                Console.log("Max amount error");
+                return ApplicationStatus.RUNNING;
+            }
+
         } catch (NumberFormatException ex) {
             Console.log("Wrong number format");
             return ApplicationStatus.RUNNING;
         } catch (IndexOutOfBoundsException ex) {
             return this.showUsage(parsedString);
         }
-        
-        if (this.collectionManager.getElementById(id) == null) {
-            Console.log("Whoops, there is no collection with this element!");
-            return ApplicationStatus.RUNNING;
+
+        for (long i = 0; i < id; i++) {
+            this.collectionManager.addElement(
+                    new LocalDateWrapper(new MusicBand()).random()
+            );
         }
-        
-        if (!this.collectionManager.removeElementById(id)) {
-            Console.log("Something went wrong, the element with id="+ id.toString() + " was not removed from collection!");
-        }
-        
+
+        Console.separatePrint("items were added", id.toString());
+
         return ApplicationStatus.RUNNING;
     }
 }

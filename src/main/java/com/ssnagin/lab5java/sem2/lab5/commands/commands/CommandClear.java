@@ -20,8 +20,10 @@ public class CommandClear extends Command {
     CollectionManager collectionManager;
     
     
-    public CommandClear(String name, String description) {
+    public CommandClear(String name, String description, CollectionManager collectionManager) {
         super(name, description);
+
+        this.collectionManager = collectionManager;
     }
 
     @Override

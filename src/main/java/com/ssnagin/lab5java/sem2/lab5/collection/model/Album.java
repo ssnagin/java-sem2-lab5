@@ -9,6 +9,7 @@ import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
@@ -52,5 +53,11 @@ public class Album extends Entity<Album> {
         if (result == 0) result = this.tracks.compareTo(otherAlbum.tracks);
         
         return result;
+    }
+
+    public Album random() {
+        this.setName(RandomStringUtils.random(RANDOM_STRING_LENGTH, true, true));
+        this.setTracks(random.nextLong(0, Long.MAX_VALUE));
+        return this;
     }
 }

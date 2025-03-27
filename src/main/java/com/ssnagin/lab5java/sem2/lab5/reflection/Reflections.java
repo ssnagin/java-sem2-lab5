@@ -59,9 +59,7 @@ public final class Reflections {
             Object value = Reflections.parseField(field.getType(), scanner);
 
             // КОСТЫЛЬ!!!
-
-
-            //ValidationManager.getInstance().validateField(value, field);
+            // ValidationManager.getInstance().validateField(value, field);
 
             Reflections.setFieldValue(instance, value);
         }

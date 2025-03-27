@@ -56,8 +56,15 @@ public class Coordinates extends Entity<Coordinates> {
     public int compareTo(Coordinates otherCoordinates) {
         int result = this.x.compareTo(otherCoordinates.x);
         
-        if (result == 0) this.y.compareTo(otherCoordinates.y);
+        if (result == 0) result = this.y.compareTo(otherCoordinates.y);
         
         return result;
+    }
+
+    @Override
+    public Coordinates random() {
+        setX(random.nextLong(Integer.MIN_VALUE, 180));
+        setY(random.nextInt(Integer.MIN_VALUE, 750));
+        return this;
     }
 }

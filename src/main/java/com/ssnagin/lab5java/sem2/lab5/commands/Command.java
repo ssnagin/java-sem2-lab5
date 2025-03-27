@@ -34,8 +34,7 @@ public abstract class Command implements Comparable<Command> {
     
      /**
      * Set the name of a command
-     * 
-     * @return String
+     *
      */
     public void setName(String name) {
         this.name = name;
@@ -43,8 +42,7 @@ public abstract class Command implements Comparable<Command> {
     
      /**
      * Set the description of a command
-     * 
-     * @param description
+     *
      */
     public void setDescription(String description) {
         this.description = description;
@@ -52,8 +50,7 @@ public abstract class Command implements Comparable<Command> {
     
      /**
      * Get the name of a command
-     * 
-     * @return String
+     *
      */
     public String getName() {
         return this.name;
@@ -61,8 +58,7 @@ public abstract class Command implements Comparable<Command> {
     
     /**
      * Get the description of a command
-     * 
-     * @return String
+     *
      */
     public String getDescription() {
         return this.description;
@@ -72,7 +68,7 @@ public abstract class Command implements Comparable<Command> {
      * Executes the given command and returns status code
      * 
      * @param parsedString
-     * @return ApplicationStatus
+     * @return
      */
     public abstract ApplicationStatus executeCommand(ParsedString parsedString);
     
@@ -80,7 +76,7 @@ public abstract class Command implements Comparable<Command> {
      * basic usage of a command
      * 
      * @param parsedString
-     * @return ApplicationStatus
+     * @return
      */
     public ApplicationStatus showUsage(ParsedString parsedString) {
         
