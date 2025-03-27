@@ -60,4 +60,11 @@ public class Coordinates extends Entity<Coordinates> {
         
         return result;
     }
+
+    @Override
+    public Coordinates random() {
+        setX(random.nextLong(Integer.MIN_VALUE, 180));
+        setY(random.nextInt(Integer.MIN_VALUE, 750));
+        return this;
+    }
 }

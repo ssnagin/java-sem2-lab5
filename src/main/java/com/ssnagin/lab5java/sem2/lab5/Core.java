@@ -108,6 +108,8 @@ public class Core {
         this.commandManager.register(new CommandRemoveLower("remove_lower", "removes elements that are lower than given", collectionManager, scanner));
         this.commandManager.register(new CommandGroupCountingByCreationDate("group_counting_by_creation_date", "groups collection elements by creation date", collectionManager));
         this.commandManager.register(new CommandSave("save", "save <filename> | saves collection to selected file. Creates if does not exist.", collectionManager, fileManager));
+        this.commandManager.register(new CommandRandom("random", "random <amount> | adds to collection <amount> random elements", collectionManager));
+
     }
 
     public Scanner getCurrentScanner() {
@@ -133,8 +135,7 @@ public class Core {
     }
 
     public void clearActiveScripts() {
-        return;
-        //this.activeScripts.clear();
+        this.activeScripts.clear();
     }
 
     private void registerValidators() {
@@ -164,12 +165,9 @@ public class Core {
                 TreeSet<MusicBand> elements = fileManager.readCollection(path);
                 this.collectionManager.setCollection(elements);
             } catch (Exception e) {
-                Console.error(e);
-                Console.log("Skip adding into collection");
+                Console.error("Error while reading file, skip adding into collection");
             }
         }
-
-
 
         // 2. Wait for the user input.
         // After it, parse given arguments with ArgumentParser
@@ -228,4 +226,5 @@ public class Core {
         Console.separatePrint("Bye, have a great time!", this.getApplicationStatus().toString());
         System.exit(this.getApplicationStatus().getCode());
     }
+
 }

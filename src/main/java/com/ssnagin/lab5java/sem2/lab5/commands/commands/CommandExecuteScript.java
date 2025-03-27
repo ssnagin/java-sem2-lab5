@@ -61,7 +61,9 @@ public class CommandExecuteScript extends Command {
                 ParsedString scriptCommand = InputParser.parse(line, ParseMode.COMMAND_ONLY);
                 Command command = commandManager.get(scriptCommand.getCommand());
 
-                command.executeCommand(scriptCommand);
+                ApplicationStatus status = command.executeCommand(scriptCommand);
+
+                if (status != ApplicationStatus.RUNNING) return status;
             }
         } catch (IOException e) {
             Console.error("Script file not found: " + e.getMessage());
@@ -76,7 +78,6 @@ public class CommandExecuteScript extends Command {
             ((Core) Core.getInstance()).popScanner(file);
         } catch (IOException e) {
             Console.error("Error while accessing to File, stop all executables...");
-            ((Core) Core.getInstance()).clearActiveScripts();
         }
         //}
 

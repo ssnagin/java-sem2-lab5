@@ -3,10 +3,7 @@ package com.ssnagin.lab5java.sem2.lab5.validation;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.Album;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.Coordinates;
 import com.ssnagin.lab5java.sem2.lab5.collection.model.MusicBand;
-import com.ssnagin.lab5java.sem2.lab5.validation.annotations.MaxValue;
-import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotEmpty;
-import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
-import com.ssnagin.lab5java.sem2.lab5.validation.annotations.PositiveNumber;
+import com.ssnagin.lab5java.sem2.lab5.validation.annotations.*;
 import lombok.Getter;
 
 import java.lang.reflect.Field;
@@ -106,6 +103,15 @@ public class TempValidator {
                 if (value instanceof Number) {
                     if (((Number) value).longValue() <= 0) {
                         errors.add(fieldName + " must be a positive number");
+                    }
+                }
+            }
+
+            // Check @NegativeNumber annotation
+            if (field.isAnnotationPresent(NegativeNumber.class) && value != null) {
+                if (value instanceof Number) {
+                    if (((Number) value).longValue() > 0) {
+                        errors.add(fieldName + " must be a negative number");
                     }
                 }
             }
