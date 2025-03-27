@@ -4,15 +4,12 @@
  */
 package com.ssnagin.lab5java.sem2.lab5.collection.model;
 
-import com.ssnagin.lab5java.sem2.lab5.collection.interfaces.Randomizeable;
 import com.ssnagin.lab5java.sem2.lab5.description.annotations.Description;
 import com.ssnagin.lab5java.sem2.lab5.validation.annotations.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
-
-import java.util.Random;
 
 /**
  *

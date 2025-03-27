@@ -175,7 +175,7 @@ public class MusicBand extends Entity<MusicBand> {
     public MusicBand random() {
         this.setBestAlbum(new Album().random());
         this.setCoordinates(new Coordinates().random());
-        this.setGenre((MusicGenre) new RandomEnumGenerator(MusicGenre.class).randomEnum());
+        this.setGenre((MusicGenre) new RandomEnumGenerator(MusicGenre.class).random());
         this.setName(RandomStringUtils.random(RANDOM_STRING_LENGTH));
         this.setSinglesCount(random.nextInt(0, Integer.MAX_VALUE));
         this.setNumberOfParticipants(random.nextLong(0, Long.MAX_VALUE));

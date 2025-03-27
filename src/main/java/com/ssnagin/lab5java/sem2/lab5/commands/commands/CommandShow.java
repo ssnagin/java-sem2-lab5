@@ -37,9 +37,12 @@ public class CommandShow extends Command {
             Console.log("Collection is empty!");
             return ApplicationStatus.RUNNING;
         } 
-        
+
+        Long counter = 0L;
+
         for (MusicBand musicBand : this.collectionManager.getCollection()) {
-            Console.println("========\n" + musicBand.getDescription());
+            counter += 1;
+            Console.println(Long.toString(counter) + " | ========\n" + musicBand.getDescription());
         }
         
         return ApplicationStatus.RUNNING;

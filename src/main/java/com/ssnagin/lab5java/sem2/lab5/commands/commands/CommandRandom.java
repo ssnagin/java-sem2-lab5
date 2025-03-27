@@ -65,9 +65,7 @@ public class CommandRandom extends Command {
 
         for (long i = 0; i < id; i++) {
             this.collectionManager.addElement(
-                    new LocalDateWrapper(
-                            new MusicBand().random()
-                    )
+                    new LocalDateWrapper(new MusicBand()).random()
             );
         }
 
