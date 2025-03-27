@@ -40,16 +40,6 @@ public class CommandUpdate extends Command {
 
     @Override
     public ApplicationStatus executeCommand(ParsedString parsedString) {
-       
-//        this.collectionManager.addElement(new LocalDateWrapper(new MusicBand(
-//            1,
-//            "test", 
-//            new Coordinates((long) 28, 1),
-//            1L, 
-//            1,
-//            MusicGenre.MATH_ROCK,
-//            new Album("Test", (long) 123)
-//        )));
         
         if (!parsedString.getArguments().isEmpty()) {
             if ("h".equals(parsedString.getArguments().getFirst()))
@@ -80,22 +70,6 @@ public class CommandUpdate extends Command {
             Console.log("Коллекции по заданому id не существует");
             return ApplicationStatus.RUNNING;
         }
-        
-        /*
-        TEMPORARY CREATED SOLUTION!!!!
-        
-        That's how it should be propperly handled:
-        
-        For command update <id> <field> <value>
-        1. Get MusicBand model
-        2. Parse given field and value 
-        3. Call right setter
-        
-        For command update <id>
-        
-        Soluion below   ||
-                        \/
-        */
         
         parsedString.setCommand("add");
         
