@@ -25,34 +25,7 @@ public class App {
     }
     
     public static void run() {
-        /*
-        Пример создания коллекции
-        
-        MusicBand musicBand = new MusicBand(
-            1,
-            "test", 
-            new Coordinates((long) 28, 1),
-            LocalDate.now(),
-            1L, 
-            1,
-            MusicGenre.MATH_ROCK,
-            new Album("Test", (long) 123)
-        );
-        
-        */
-        
-        CollectionManager collectionManager = new CollectionManager();
-        //Validate validationController = new Validate();
-        
-        collectionManager.addElement(new MusicBand(
-            "test", 
-            new Coordinates((long) 28, 1),
-            1L, 
-            1,
-            MusicGenre.MATH_ROCK,
-            new Album("Test", (long) 123)
-        ));
-        
+
         
     }
 }

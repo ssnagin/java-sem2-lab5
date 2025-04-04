@@ -42,19 +42,19 @@ public class CommandUpdate extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         
         if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().getFirst()))
+            if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
-        
+
         Long id;
-        
+
         // Try to parse Integer
         // VALIDATOR HERE
 
         try {
             id = (Long) Reflections.parsePrimitiveInput(
-                    Long.class, 
-                    parsedString.getArguments().getFirst()
+                    Long.class,
+                    parsedString.getArguments().get(0)
             );
         } catch (NumberFormatException ex) {
             Console.log("Неверный формат числа");

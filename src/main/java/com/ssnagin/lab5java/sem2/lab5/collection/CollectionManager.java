@@ -45,7 +45,7 @@ public class CollectionManager {
         if (this.collection.isEmpty()) {
             return null;
         }
-        return this.collection.getFirst();
+        return this.collection.first();
     }
     
     public void removeElement(MusicBand musicBand) {

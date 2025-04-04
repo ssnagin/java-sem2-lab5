@@ -41,7 +41,7 @@ public class CommandRandom extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
 
         if (!parsedString.getArguments().isEmpty()) {
-            if (" h".equals(parsedString.getArguments().getFirst()))
+            if (" h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
 
@@ -50,7 +50,7 @@ public class CommandRandom extends Command {
         // Try to parse Integer
         // VALIDATOR HERE
         try {
-            id = Long.parseLong(parsedString.getArguments().getFirst());
+            id = Long.parseLong(parsedString.getArguments().get(0));
 
             if (id > MAX_RANDOM_AMOUNT) {
                 Console.log("Max amount error");

@@ -31,7 +31,7 @@ public class CommandRemoveById extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         
         if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().getFirst()))
+            if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
         
@@ -40,7 +40,7 @@ public class CommandRemoveById extends Command {
         // Try to parse Integer
         // VALIDATOR HERE
         try {
-            id = Long.parseLong(parsedString.getArguments().getFirst());
+            id = Long.parseLong(parsedString.getArguments().get(0));
         } catch (NumberFormatException ex) {
             Console.log("Wrong number format");
             return ApplicationStatus.RUNNING;

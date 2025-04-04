@@ -43,8 +43,23 @@ public class CommandAdd extends Command {
     public ApplicationStatus executeCommand(ParsedString parsedString) {
         this.scanner = Core.getInstance().getCurrentScanner();
 
+        /*
+            Пример создания коллекции
+
+            MusicBand musicBand = new MusicBand(
+                1,
+                "test",
+                new Coordinates((long) 28, 1),
+                LocalDate.now(),
+                1L,
+                1,
+                MusicGenre.MATH_ROCK,
+                new Album("Test", (long) 123)
+            );
+        */
+
         if (!parsedString.getArguments().isEmpty()) {
-            if ("h".equals(parsedString.getArguments().getFirst()))
+            if ("h".equals(parsedString.getArguments().get(0)))
                 return this.showUsage(parsedString);
         }
         

@@ -39,7 +39,7 @@ public class CommandCountByNumberOfParticipants extends Command {
         try {
             numberOfParticipants = (Long) Reflections.parsePrimitiveInput(
                     Long.class,
-                    parsedString.getArguments().getFirst()
+                    parsedString.getArguments().get(0)
             );
         } catch (NumberFormatException ex) {
             Console.log("Неверный формат числа");

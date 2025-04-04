@@ -40,7 +40,7 @@ public class CommandSave extends Command {
 
         Console.println(parsedString);
 
-        String path = parsedString.getArguments().getFirst();
+        String path = parsedString.getArguments().get(0);
 
         try {
             fileManager.write(this.collectionManager.getCollection(), path);
