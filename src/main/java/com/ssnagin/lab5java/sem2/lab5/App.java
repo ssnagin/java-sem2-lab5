@@ -23,9 +23,4 @@ public class App {
     public static void main(String[] args) {
         Core.getInstance().start(args);
     }
-    
-    public static void run() {
-
-        
-    }
 }
